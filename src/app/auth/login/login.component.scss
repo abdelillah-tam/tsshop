@@ -1,0 +1,40 @@
+@use '../../../base' as base;
+
+.login-div {
+    padding-left: base.$padding;
+    padding-right: base.$padding;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .login-form {
+        height: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        .input-class{
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+        }
+        input {
+            height: 40px;
+            outline-width: 0;
+            border: none;
+            border-radius: 999px;
+            padding-left: 12px;
+            margin-top: 6px;
+        }
+
+        .login-btn{
+            height: 40px;
+            width: 40%;
+            border: none;
+            border-radius: 6px;
+            font-weight: bolder;
+            font-size: 1rem;
+            background-color: #FFD701;
+        }
+    }
+}
