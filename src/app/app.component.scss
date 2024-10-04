@@ -1,88 +1,91 @@
 @use '../base' as base;
 
-mat-toolbar {
-    --mat-toolbar-standard-height: 120px;
-    --mat-toolbar-container-background-color: white;
-    display: flex;
-    justify-content: space-between;
-    padding-left: base.$padding;
-    padding-right: base.$padding;
+header {
+    position: sticky;
+    top: 0;
+    mat-toolbar {
+        --mat-toolbar-standard-height: 120px;
+        --mat-toolbar-container-background-color: white;
+        display: flex;
+        justify-content: space-between;
+        padding-left: base.$padding;
+        padding-right: base.$padding;
 
-    div {
-        .menu-a {
-            display: none;
+        div {
+            .menu-a {
+                display: none;
+            }
+
+            .logo-div {
+                height: 100px;
+                width: 100px;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .logo-img {
+                    height: 90%;
+                    width: 90%;
+                    object-fit: contain;
+                }
+            }
         }
 
-        .logo-div {
-            height: 100px;
-            width: 100px;
-            overflow: hidden;
+        .search-div {
             display: flex;
             justify-content: center;
             align-items: center;
 
-            .logo-img {
-                height: 90%;
-                width: 90%;
-                object-fit: contain;
+            &>input {
+                height: 32px;
+                width: 18rem;
+                outline: none;
+                border: 0.1px solid lightgray;
+                border-top-left-radius: 999px;
+                border-bottom-left-radius: 999px;
+                border-right-width: 0;
+                padding-left: 1rem;
+            }
+
+            .search-icon-div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #FFD701;
+                height: 32px;
+                width: 56px;
+                border: 0.1px solid lightgray;
+                border-top-right-radius: 999px;
+                border-bottom-right-radius: 999px;
+                border-left-width: 0;
+            }
+        }
+
+        .options-div {
+            display: flex;
+
+            &>div {
+                height: 40px;
+                width: 40px;
+                margin: 6px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 0.1px solid gray;
+                border-radius: 999px;
+                overflow: hidden;
+
+                mat-icon {
+                    font-size: 24px;
+                }
             }
         }
     }
 
-    .search-div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &>input {
-            height: 32px;
-            width: 18rem;
-            outline: none;
-            border: 0.1px solid lightgray;
-            border-top-left-radius: 999px;
-            border-bottom-left-radius: 999px;
-            border-right-width: 0;
-            padding-left: 1rem;
-        }
-
-        .search-icon-div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #FFD701;
-            height: 32px;
-            width: 56px;
-            border: 0.1px solid lightgray;
-            border-top-right-radius: 999px;
-            border-bottom-right-radius: 999px;
-            border-left-width: 0;
-        }
-    }
-
-    .options-div {
-        display: flex;
-
-        &>div {
-            height: 40px;
-            width: 40px;
-            margin: 6px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 0.1px solid gray;
-            border-radius: 999px;
-            overflow: hidden;
-
-            mat-icon {
-                font-size: 24px;
-            }
-        }
-    }
 }
 
-
-
-@media (max-width: 500px) {
+@media (max-width: 599px) {
     header {
         mat-toolbar {
             display: flex;
@@ -93,9 +96,10 @@ mat-toolbar {
             padding-right: base.$mobile_padding;
 
             div {
-                .menu-a{
+                .menu-a {
                     display: inherit;
                 }
+
                 .logo-div {
                     height: 50px;
                     width: 50px;
@@ -163,18 +167,86 @@ mat-toolbar {
             }
         }
 
-        .navigator{
-            position: absolute;
+        .navigator {
+            position: fixed;
             height: calc(100% - 56px);
             width: 100%;
-        }
-
-        .opened-nav{
-            left: 0;
-        }
-
-        .closed-nav{
             left: -100%;
+
+            &.opened-nav {
+                left: 0;
+                animation: open;
+                animation-duration: 500ms;
+            }
+
+            &:not(.opened-nav) {
+                left: -100%;
+                animation: close;
+                animation-duration: 500ms;
+            }
+        }
+
+        .background {
+            &.show-background {
+                height: calc(100% - 56px);
+                width: 100%;
+                background-color: black;
+                position: fixed;
+                opacity: 0.5;
+                animation: show;
+                animation-duration: 500ms;
+            }
+
+            &:not(.show-background) {
+                height: calc(100% - 56px);
+                width: 100%;
+                background-color: black;
+                position: absolute;
+                opacity: 0;
+                animation: hide;
+                animation-duration: 500ms;
+            }
+        }
+
+
+        @keyframes open {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        @keyframes close {
+            from {
+                left: 0;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        @keyframes show {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes hide {
+            from {
+                opacity: 0.5;
+            }
+
+            to {
+                opacity: 0;
+            }
         }
     }
 }

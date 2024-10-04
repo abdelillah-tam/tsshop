@@ -28,8 +28,11 @@ export class AppComponent {
 
   openNavigator() {
     let navigatorElement = this.element.nativeElement.querySelector('.navigator');
+    let backgroundElement = this.element.nativeElement.querySelector('.background');
     navigatorElement?.classList.toggle('opened-nav');
-    navigatorElement?.classList.toggle('closed-nav');
+    backgroundElement?.classList.toggle('show-background');
 
   }
+
+
 }
