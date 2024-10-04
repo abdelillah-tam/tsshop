@@ -1,7 +1,11 @@
 <header>
     <mat-toolbar>
-        <div class="logo-div">
-            <img class="logo-img" src="logo.png" />
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <a class="menu-a" (click)="openNavigator()"><mat-icon>menu</mat-icon></a>
+            <div class="logo-div">
+                <img class="logo-img" src="logo.png" />
+            </div>
         </div>
         <div class="search-div">
             <input class="search-input" />
@@ -18,20 +22,9 @@
             </div>
         </div>
     </mat-toolbar>
-    <nav class="nav-menu">
 
-        <a class="a-categories" href="#"><mat-icon>menu</mat-icon>
-            <p>All Categories</p>
-        </a>
-        <ul class="menu-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-        </ul>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <p>*Free Shipping On Orders <span style="color: red;">+{{ 500 | currency :'USD' : 'symbol' :
-                    '1.0-0'}}</span></p>
-        </div>
-    </nav>
+    <app-navigation class="navigator closed-nav"></app-navigation>
+
 </header>
 <router-outlet />
 <section>

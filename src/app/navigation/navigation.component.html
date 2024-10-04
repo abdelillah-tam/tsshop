@@ -1,0 +1,33 @@
+<div class="background">
+
+</div>
+<nav class="nav-menu">
+    <a class="a-categories" (click)="showCategories()">
+        <div style="width: 100%;display: flex; justify-content: space-between; align-items: center; padding: 16px;">
+            <div style="display: flex; justify-content: start; align-items: center;">
+                <mat-icon class="menu-icon">menu</mat-icon>
+                <p>All Categories</p>
+            </div>
+            <mat-icon [fontIcon]="openedCategories ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"></mat-icon>
+        </div>
+        <ul class=" categories">
+            <li class="category-item">One</li>
+            <li class="category-item">One</li>
+            <li class="category-item">One</li>
+            <li class="category-item">One</li>
+            <li class="category-item">One</li>
+            <li class="category-item">One</li>
+        </ul>
+    </a>
+
+
+    <ul class="menu-list">
+        <li style="padding: 16px;"><a href="#">Home</a></li>
+        <li style="padding: 16px;"><a href="#">Shop</a></li>
+    </ul>
+    <div class="free-div">
+        <p>*Free Shipping On Orders <span style="color: red;">+{{ 500 | currency :'USD' : 'symbol' :
+                '1.0-0'}}</span></p>
+    </div>
+
+</nav>
