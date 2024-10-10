@@ -1,0 +1,62 @@
+<div class="add-product-div">
+    <form [formGroup]="productGroup">
+        <div style="display: flex; flex-direction: column;">
+            <label>Product Images</label>
+            <div class="product-images">
+                <div class="image">
+                    <label for="inputFileZero"><img [src]="showImage(0)" />
+                        <p>Add an image</p>
+                    </label>
+                    <input class="input-file" type="file" (change)="onImageAdded($event, 0)" id="inputFileZero" />
+                </div>
+
+                <div class="image">
+                    <label for="inputFileOne"><img [src]="showImage(1)" />
+                        <p>Add an image</p>
+                    </label>
+                    <input class="input-file" type="file" id="inputFileOne" (change)="onImageAdded($event, 1)" />
+                </div>
+                <div class="image">
+                    <label for="inputFileTwo"><img [src]="showImage(2)" />
+                        <p>Add an image</p>
+                    </label>
+                    <input class="input-file" type="file" id="inputFileTwo" (change)="onImageAdded($event, 2)" />
+                </div>
+                <div class="image">
+                    <label for="inputFileThree"><img [src]="showImage(3)" />
+                        <p>Add an image</p>
+                    </label>
+                    <input class="input-file" type="file" id="inputFileThree" (change)="onImageAdded($event, 3)" />
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+            <label>Product Title</label>
+            <input class="input-text" placeholder="Product Title" formControlName="productTitle" />
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <label>Product Description</label>
+            <textarea placeholder="Description" formControlName="productDescription"></textarea>
+        </div>
+        <ul style="list-style-type: none; display: flex; justify-content: space-between;">
+            <li style="flex-basis: 48%;">
+                <label>Quantity</label>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <button class="quantity-button" (click)="addOne()" type="button">+</button>
+                    <input style="flex-basis: 80%;" class="input-text" formControlName="productQuantity" />
+                    <button class="quantity-button" (click)="removeOne()" type="button">-</button>
+                </div>
+            </li>
+            <li style="flex-basis: 48%;">
+                <label class="price-symbol">Price</label>
+                <input style="width: 100%;" class="input-text" placeholder="Price" formControlName="productPrice" />
+            </li>
+        </ul>
+
+
+        <button class="save-btn">Save</button>
+
+    </form>
+
+</div>

@@ -1,0 +1,58 @@
+@use '../../base' as base;
+
+header{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 24px;
+    p{
+        font-size: 2rem;
+    }
+}
+
+.panel{
+    display: flex;
+    width: 100%;
+    list-style-type: none;
+    padding-left: base.$padding;
+    padding-right: base.$padding;
+    justify-content: space-between;
+    margin-top: 4%;
+    .panel-nav{
+        flex-basis: 25%;
+        background-color: white;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        padding:16px;
+        height: fit-content;
+
+        .info-div{
+            p{
+                margin-top: 8px;
+            }
+        }
+
+        a{
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            color: base.$black;
+        }
+    }
+    li{
+        flex-basis: 70%;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .panel{
+        flex-direction: column;
+        padding-left: base.$mobile_padding;
+        padding-right: base.$mobile_padding;
+        .panel-result{
+            margin-top: 16px;
+        }
+    }
+}

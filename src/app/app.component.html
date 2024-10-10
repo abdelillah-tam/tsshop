@@ -1,4 +1,4 @@
-<header >
+<header>
     <mat-toolbar>
 
         <div style="display: flex; justify-content: center; align-items: center;">
@@ -14,10 +14,15 @@
             </div>
         </div>
         <div class="options-div">
+            @if(userType !== null && userType === 'owner'){
+            <div style="cursor: pointer;" (click)="navigateToAddProduct()">
+                <mat-icon class="material-icons-outlined" fontIcon="add"></mat-icon>
+            </div>
+            }
             <div style="cursor: pointer;">
                 <mat-icon class="material-icons-outlined" fontIcon="shopping_cart"></mat-icon>
             </div>
-            <div style="cursor: pointer;" routerLink="/login" routerLinkActive="active">
+            <div style="cursor: pointer;" (click)="clickRequest()">
                 <mat-icon class="material-icons-outlined" fontIcon="person"></mat-icon>
             </div>
         </div>
