@@ -1,0 +1,20 @@
+<header>
+    <p>All Products</p>
+</header>
+
+<div class="products-panel">
+    <aside>
+        <div>
+            <p>Categories</p>
+            <ul>
+                @for (item of categories; track $index) {
+                    <li (click)="choose($index)" [className]="$index === 0 ? 'clicked': ''">{{ item }}</li>
+                }
+            </ul>
+        </div>
+    </aside>
+    <section>
+        <p>Products</p>
+        <app-products [products]="products"></app-products>
+    </section>
+</div>

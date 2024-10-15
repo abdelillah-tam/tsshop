@@ -47,7 +47,6 @@
             color: black;
             list-style-type: none;
             background-color: white;
-            padding-left: 16px;
             top: 100%;
             left: 0;
 
@@ -55,6 +54,10 @@
                 height: 56px;
                 display: flex;
                 align-items: center;
+                padding-left: 16px;
+                &:hover{
+                    background-color: #e9e8e8;
+                }
             }
         }
 

@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ShopComponent } from './shop/shop.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +38,10 @@ export const routes: Routes = [
         title: 'Add Product',
         path: 'add-product',
         component: AddProductComponent
+    },
+    {
+        path: 'shop',
+        component: ShopComponent
     },
     {
         path: '',

@@ -1,0 +1,33 @@
+.product-image {
+    background-color: white;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 70%;
+        object-fit: contain;
+    }
+}
+
+ul {
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style-type: none;
+    .product-title {
+        display: -webkit-box;
+        margin-top: 6px;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+    .price {
+        color: green;
+    }
+}

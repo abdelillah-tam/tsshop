@@ -8,6 +8,9 @@
     padding-right: base.$padding;
 
     form {
+        --mdc-filled-text-field-container-color: #e9e8e8;
+        --mdc-filled-text-field-container-shape: 24px;
+        --mat-select-panel-background-color: #e9e8e8;
         display: flex;
         flex-direction: column;
         height: 80%;
@@ -78,9 +81,9 @@
             margin-top: 12px;
         }
 
-        .save-btn{
+        .save-btn {
             height: 40px;
-            border-radius: 999px;
+            border-radius: 6px;
             border: none;
             background-color: base.$yellow;
             font-weight: bold;

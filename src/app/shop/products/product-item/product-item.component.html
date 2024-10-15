@@ -1,0 +1,14 @@
+<div class="product-image">
+    <img [src]="product?.productImageUrlOne" />
+</div>
+<ul>
+    <li>
+        <p class="product-title">{{ product?.productTitle }}</p>
+    </li>
+
+    <li style="display: flex; align-items: center; justify-content: space-between;">
+        <p style="text-align: center;" class="price">{{ product?.productPrice | currency }}</p>
+        <mat-icon fontIcon="arrow_forward" style="color: #1E1E1E; background-color: darkgray; border-radius: 999px;"></mat-icon>
+    </li>
+
+</ul>

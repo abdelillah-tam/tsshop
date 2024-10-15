@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
 import { NavigationComponent } from "./navigation/navigation.component";
+import { CATEGORIES } from './model/categories';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,8 @@ export class AppComponent implements OnInit {
       .initApp('D80EE3D7-77E9-4614-8823-4277DF4DFF55',
         '8CC8EB92-58D3-4949-931B-73217384B47A');
   }
+
+  categories = CATEGORIES;
 
   userType : string | null = null;
 
