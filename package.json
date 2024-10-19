@@ -22,7 +22,6 @@
     "@angular/router": "^18.2.0",
     "@ngrx/effects": "^18.0.2",
     "@ngrx/store": "^18.0.2",
-    "backendless": "^7.3.7",
     "firebase": "^10.14.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

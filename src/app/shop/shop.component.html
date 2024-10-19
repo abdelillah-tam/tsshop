@@ -8,13 +8,17 @@
             <p>Categories</p>
             <ul>
                 @for (item of categories; track $index) {
-                    <li (click)="choose($index)" [className]="$index === 0 ? 'clicked': ''">{{ item }}</li>
-                }
+                <li (click)="choose($index)" [className]="$index === 0 ? 'clicked': ''">{{ item }}</li>
+                } 
             </ul>
         </div>
     </aside>
     <section>
         <p>Products</p>
         <app-products [products]="products"></app-products>
+        <mat-paginator style="background-color: white; padding-top: 8px; padding-bottom: 8px;" pageSize="20" [length]="count"
+            (page)="pageHandler($event)"></mat-paginator>
+
     </section>
+
 </div>

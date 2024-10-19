@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="options-div">
-            @if(userType !== null && userType === 'owner'){
+            @if(userType !== null && userType === 'owner' && userTokenValidation){
             <div style="cursor: pointer;" (click)="navigateToAddProduct()">
                 <mat-icon class="material-icons-outlined" fontIcon="add"></mat-icon>
             </div>

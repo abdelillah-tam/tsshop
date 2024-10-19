@@ -28,6 +28,7 @@ header {
             border-style: solid;
             border-radius: 6px;
             background-color: white;
+
             p {
                 padding: 16px 12px;
                 border-bottom-width: 1px;
@@ -40,11 +41,13 @@ header {
 
             ul {
                 list-style-type: none;
-                li{
+
+                li {
                     padding: 16px 12px;
                     color: base.$black;
                     cursor: pointer;
-                    &:not(.clicked){
+
+                    &:not(.clicked) {
                         color: gray;
                     }
                 }
@@ -56,12 +59,38 @@ header {
         flex-basis: 74%;
         margin-top: 16px;
         border-radius: 6px;
-        p{
+
+        p {
             background-color: white;
             border-radius: 6px;
             font-size: 19px;
             padding: 16px 12px;
             font-weight: 500;
         }
+
+        
+
+        .counter-ul {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+            margin-bottom: 24px;
+            li {
+                cursor: pointer;
+                .counter {
+                    background-color: base.$yellow;
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .products-panel {
+        flex-direction: column;
+        padding-left: base.$mobile_padding;
+        padding-right: base.$mobile_padding;
+
     }
 }

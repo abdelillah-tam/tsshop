@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loginAction } from '../../store/actions';
-import { userSelector } from '../../store/selectors';
+import { userSelector, validationSelector } from '../../store/selectors';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +24,17 @@ export class LoginComponent {
       }
     });
 
-    if (localStorage.getItem('email') !== null
-      && localStorage.getItem('objectId') !== null
-      && localStorage.getItem('userToken') !== null
-      && localStorage.getItem('type') !== null) {
-      this.router.navigate(['/dashboard']);
-    }
+    this.store.select(validationSelector).subscribe((result) => {
+      console.log(result);
+      if (localStorage.getItem('email') !== null
+        && localStorage.getItem('objectId') !== null
+        && localStorage.getItem('userToken') !== null
+        && localStorage.getItem('type') !== null
+        && result) {
+        this.router.navigate(['/dashboard']);
+      }
+    })
+
   }
 
   loginGroup = new FormGroup({

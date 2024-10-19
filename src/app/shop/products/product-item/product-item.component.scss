@@ -4,15 +4,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    user-select: none;
     img {
         width: 70%;
+        height: 70%;
         object-fit: contain;
     }
 }
 
 ul {
-    height: 220px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,5 +30,11 @@ ul {
 
     .price {
         color: green;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .product-image{
+        width: 100%;
     }
 }

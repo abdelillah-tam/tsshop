@@ -1,24 +1,26 @@
 import { createReducer, on } from "@ngrx/store"
-import { emptyStateAction, gottenProductsAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction } from "./actions"
+import { emptyStateAction, gottenProductsAndCountAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction, validationResultAction } from "./actions"
 import { Product } from "../model/product"
 
 export const initialUserState = {
     email: '',
     objectId: '',
     userToken: '',
-    type: ''
+    type: '',
+    valid: false
 }
 
 export const initialFileState = {
     imageUrlOne: '',
     imageUrlTwo: '',
     imageUrlThree: '',
-    imageUrlFour: ''
+    imageUrlFour: '',
+    product: new Product('', '', '', '', '', '', '', '', 0, 0)
 }
 
 export const initialProductState: Product = new Product('', '', '', '', '', '', '', '', 0, 0);
 
-export const initialProductsState: Product[] = [];
+export const initialProductsState: { products: Product[]; count: number } = { products: [], count: 0 };
 
 export const userReducer = createReducer(initialUserState,
     on(loggedInAction, (state, data) => {
@@ -28,6 +30,12 @@ export const userReducer = createReducer(initialUserState,
             objectId: data.objectId,
             userToken: data.userToken,
             type: data.userType
+        }
+    }),
+    on(validationResultAction, (state, data) => {
+        return {
+            ...state,
+            valid: data.valid
         }
     })
 );
@@ -41,6 +49,7 @@ export const fileReducer = createReducer(
             imageUrlTwo: data.urls[1],
             imageUrlThree: data.urls[2],
             imageUrlFour: data.urls[3],
+            product: data.product
         }
     }),
     on(emptyStateAction, () => initialFileState)
@@ -54,5 +63,5 @@ export const productReducer = createReducer(initialProductState,
 )
 
 export const productsReducer = createReducer(initialProductsState,
-    on(gottenProductsAction, (state, data) => data.products)
+    on(gottenProductsAndCountAction, (state, data) => data)
 );

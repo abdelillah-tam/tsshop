@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "../services/auth/auth.service";
-import { ADD_PRODUCT, GET_PRODUCTS, gottenProductsAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, UPLOAD_PRODUCT_IMAGE } from "./actions";
-import { catchError, exhaustMap, from, map } from "rxjs";
+import { ADD_PRODUCT, GET_PRODUCTS, gottenProductsAndCountAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, UPLOAD_PRODUCT_IMAGE, USER_TOKEN_VALIDATION, validationResultAction } from "./actions";
+import { catchError, exhaustMap, forkJoin, from, map } from "rxjs";
 import { FileService } from "../services/file/file.service";
 import { ProductService } from "../services/product/product.service";
 import { Product } from "../model/product";
@@ -11,6 +11,7 @@ import { Product } from "../model/product";
 export class UserEffects {
 
     login$;
+    validating$;
 
     constructor(private actions: Actions, private authService: AuthService) {
         this.login$ = createEffect(() => this.actions.pipe(
@@ -24,6 +25,16 @@ export class UserEffects {
                         }))
                     )
             })
+        ));
+
+        this.validating$ = createEffect(() => this.actions.pipe(
+            ofType(USER_TOKEN_VALIDATION),
+            exhaustMap(() => {
+                return this.authService.userTokenValidation()
+                    .pipe(
+                        map(data => validationResultAction({ valid: data }))
+                    )
+            })
         ))
     }
 }
@@ -35,11 +46,11 @@ export class FileEffects {
     constructor(private actions: Actions, private fileService: FileService) {
         this.upload$ = createEffect(() => this.actions.pipe(
             ofType(UPLOAD_PRODUCT_IMAGE),
-            exhaustMap((value: { file: File[] }) => {
+            exhaustMap((value: { file: File[], product: Product }) => {
                 return from(this.fileService.uploadFiles(value.file))
                     .pipe(
                         map(urls => {
-                            return passImageUrlAction({ urls: urls });
+                            return passImageUrlAction({ urls: urls, product: value.product });
                         })
                     )
 
@@ -68,14 +79,29 @@ export class ProductEffects {
 
         this.allProducts$ = createEffect(() => this.actions.pipe(
             ofType(GET_PRODUCTS),
-            exhaustMap((value: {category: string}) => {
-                return this.productService.getProductsByCategory(value.category)
-                .pipe(
-                    map(products => {
-                        return gottenProductsAction({products: products});
+            exhaustMap((value: { category: string, offset: number }) => {
+                return forkJoin({
+                    products: this.productService.getProductsByCategory(value.category, value.offset),
+                    count: this.productService.getCountByCategory(value.category)
+                }).pipe(
+                    map(data => {
+                        return gottenProductsAndCountAction({ products: data.products, count: data.count[0].count })
                     })
                 )
             })
+
         ))
     }
 }
+/*exhaustMap((value: { category: string }) => {
+    return this.productService.getProductsByCategory(value.category)
+        .pipe(
+            map(products => {
+                this.productService.getCountByCategory(value.category)
+                .pipe(
+                    map(count => {})
+                )
+                return gottenProductsAndCountAction({ products: products });
+            })
+        )
+})*/

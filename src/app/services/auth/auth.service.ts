@@ -18,4 +18,11 @@ export class AuthService {
       })
     })
   }
+
+  userTokenValidation() {
+    let userToken = localStorage.getItem('userToken');
+
+    return this.http.get<boolean>(`https://squarebattle-us.backendless.app/api/users/isvalidusertoken/${userToken}`);
+
+  }
 }

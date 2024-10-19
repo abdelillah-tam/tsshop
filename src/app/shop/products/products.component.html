@@ -1,5 +1,9 @@
 <ul class="products" style="list-style-type: none;">
     @for (item of products; track $index) {
-        <app-product-item class="product-item" [product]="item"></app-product-item>
+    <app-product-item class="product-item" [product]="item"></app-product-item>
+    }@empty {
+    <li>
+        <p>No Products</p>
+    </li>
     }
 </ul>
