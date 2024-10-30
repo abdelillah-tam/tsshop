@@ -1,17 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "../services/auth/auth.service";
-import { ADD_PRODUCT, GET_PRODUCTS, gottenProductsAndCountAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, UPLOAD_PRODUCT_IMAGE, USER_TOKEN_VALIDATION, validationResultAction } from "./actions";
+import { ADD_PRODUCT, GET_PRODUCT, GET_PRODUCTS, gottenProductAction, gottenProductsAndCountAction, gottenTopSellersAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, signedupAction, SIGNUP_ACTION, TOP_SELLERS, UPLOAD_PRODUCT_IMAGE, USER_TOKEN_VALIDATION, validationResultAction } from "./actions";
 import { catchError, exhaustMap, forkJoin, from, map } from "rxjs";
 import { FileService } from "../services/file/file.service";
 import { ProductService } from "../services/product/product.service";
 import { Product } from "../model/product";
+import { User } from "../model/user";
 
 @Injectable()
 export class UserEffects {
 
     login$;
     validating$;
+    signup$;
 
     constructor(private actions: Actions, private authService: AuthService) {
         this.login$ = createEffect(() => this.actions.pipe(
@@ -33,6 +35,17 @@ export class UserEffects {
                 return this.authService.userTokenValidation()
                     .pipe(
                         map(data => validationResultAction({ valid: data }))
+                    )
+            })
+        ));
+
+        this.signup$ = createEffect(() => this.actions.pipe(
+            ofType(SIGNUP_ACTION),
+            exhaustMap((value: { user: User, password: string }) => {
+                return this.authService
+                    .signup(value.user, value.password)
+                    .pipe(
+                        map(data => signedupAction({ user: data }))
                     )
             })
         ))
@@ -63,6 +76,8 @@ export class FileEffects {
 export class ProductEffects {
     add$;
     allProducts$;
+    product$;
+    topSellers$;
 
     constructor(private actions: Actions, private productService: ProductService) {
         this.add$ = createEffect(() => this.actions.pipe(
@@ -90,18 +105,26 @@ export class ProductEffects {
                 )
             })
 
+        ));
+
+        this.product$ = createEffect(() => this.actions.pipe(
+            ofType(GET_PRODUCT),
+            exhaustMap((value: { objectId: string }) => {
+                return this.productService.getProduct(value.objectId)
+                    .pipe(map(data => {
+                        return gottenProductAction({ product: data });
+                    }))
+            })
+        ));
+
+        this.topSellers$ = createEffect(() => this.actions.pipe(
+            ofType(TOP_SELLERS),
+            exhaustMap(() => {
+                return this.productService.getTopSeller()
+                .pipe(map(data => {
+                    return gottenTopSellersAction({products: data});
+                }))
+            })
         ))
     }
 }
-/*exhaustMap((value: { category: string }) => {
-    return this.productService.getProductsByCategory(value.category)
-        .pipe(
-            map(products => {
-                this.productService.getCountByCategory(value.category)
-                .pipe(
-                    map(count => {})
-                )
-                return gottenProductsAndCountAction({ products: products });
-            })
-        )
-})*/

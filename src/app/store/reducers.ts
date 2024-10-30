@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { emptyStateAction, gottenProductsAndCountAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction, validationResultAction } from "./actions"
+import { emptyStateAction, gottenProductAction, gottenProductsAndCountAction, gottenTopSellersAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction, signedupAction, validationResultAction } from "./actions"
 import { Product } from "../model/product"
 
 export const initialUserState = {
@@ -15,12 +15,17 @@ export const initialFileState = {
     imageUrlTwo: '',
     imageUrlThree: '',
     imageUrlFour: '',
-    product: new Product('', '', '', '', '', '', '', '', 0, 0)
+    imageUrlFive: '',
+    product: new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0)
 }
 
-export const initialProductState: Product = new Product('', '', '', '', '', '', '', '', 0, 0);
+export const initialProductState: Product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
+
+export const initialAddProductState: Product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
 
 export const initialProductsState: { products: Product[]; count: number } = { products: [], count: 0 };
+
+export const initialTopSellersState: Product[] = [];
 
 export const userReducer = createReducer(initialUserState,
     on(loggedInAction, (state, data) => {
@@ -37,6 +42,12 @@ export const userReducer = createReducer(initialUserState,
             ...state,
             valid: data.valid
         }
+    }),
+    on(signedupAction, (state, data) => {
+        return {
+            ...state,
+            email: data.user.email
+        }
     })
 );
 
@@ -49,6 +60,7 @@ export const fileReducer = createReducer(
             imageUrlTwo: data.urls[1],
             imageUrlThree: data.urls[2],
             imageUrlFour: data.urls[3],
+            imageUrlFive: data.urls[4],
             product: data.product
         }
     }),
@@ -56,12 +68,21 @@ export const fileReducer = createReducer(
 );
 
 export const productReducer = createReducer(initialProductState,
+    on(emptyStateAction, () => initialProductState),
+    on(gottenProductAction, (state, data) => data.product),
+);
+
+export const addProductReducer = createReducer(initialAddProductState,
     on(productAddedAction, (state, data) => {
         return data.product;
     }),
-    on(emptyStateAction, () => initialProductState)
+    on(emptyStateAction, () => initialAddProductState)
 )
 
 export const productsReducer = createReducer(initialProductsState,
     on(gottenProductsAndCountAction, (state, data) => data)
 );
+
+export const topSellerProductsReducer = createReducer(initialTopSellersState,
+    on(gottenTopSellersAction, (state, data) => data.products)
+)

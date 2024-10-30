@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,28 +16,38 @@ import { validationSelector } from './store/selectors';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'TSshop';
   constructor(private router: Router,
     private element: ElementRef,
-    private store: Store) {
+    private store: Store,
+    private changeDetectorRef: ChangeDetectorRef) {
   }
 
   categories = CATEGORIES;
 
   userType: string | null = null;
-  userTokenValidation: boolean = false;
+  userTokenValidation: boolean = true;
 
   ngOnInit(): void {
+    console.log('called');
     this.store.dispatch(userTokenValidationAction());
     this.store.select(validationSelector).subscribe((result) => {
       this.userTokenValidation = result;
     })
-    this.userType = localStorage.getItem('type');
+
+    setTimeout(() => {
+      this.userType = localStorage.getItem('type');
+    }, 0);
+
+
+
   }
 
 
-
+  ngAfterViewInit(): void {
+    this.changeDetectorRef.detectChanges();
+  }
   navigateToLogin() {
     this.router.navigate(['/login']);
   }

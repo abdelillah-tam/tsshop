@@ -8,7 +8,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Product } from '../model/product';
 import { Store } from '@ngrx/store';
 import { addProductAction, emptyStateAction, uploadProductImageAction, userTokenValidationAction } from '../store/actions';
-import { fileSelector, productSelector, validationSelector } from '../store/selectors';
+import { addProductSelector, fileSelector, validationSelector } from '../store/selectors';
 import { Router } from '@angular/router';
 import { CATEGORIES } from '../model/categories';
 
@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit {
     'empty.jpg',
     'empty.jpg',
     'empty.jpg',
+    'empty.jpg',
     'empty.jpg'
   ];
 
@@ -37,7 +38,7 @@ export class AddProductComponent implements OnInit {
 
   price: number = 0;
 
-  product = new Product('', '', '', '', '', '', '', '', 0, 0);
+  product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
 
   productGroup = new FormGroup({
     productTitle: new FormControl('', [Validators.required]),
@@ -67,13 +68,14 @@ export class AddProductComponent implements OnInit {
           product.productImageUrlTwo = result.imageUrlTwo;
           product.productImageUrlThree = result.imageUrlThree;
           product.productImageUrlFour = result.imageUrlFour;
+          product.productImageUrlFive = result.imageUrlFive;
           this.store.dispatch(addProductAction({ product: product }));
           this.store.dispatch(emptyStateAction());
         }
 
       });
 
-    this.store.select(productSelector).subscribe((result) => {
+    this.store.select(addProductSelector).subscribe((result) => {
       if (result.productTitle.length > 0) {
         this.store.dispatch(emptyStateAction());
         this.router.navigate(['/home']);

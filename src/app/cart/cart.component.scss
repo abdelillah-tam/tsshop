@@ -1,0 +1,21 @@
+@use '../../base' as base;
+
+header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 24px;
+
+    p {
+        font-size: 2rem;
+    }
+}
+.cart-div{
+    
+    --mat-stepper-container-color: transparent;
+    --mat-stepper-header-selected-state-icon-background-color: green;
+
+    padding-left: base.$padding;
+    padding-right: base.$padding;
+}

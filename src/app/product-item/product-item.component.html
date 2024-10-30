@@ -1,7 +1,7 @@
-<div class="product-image">
-    <img [src]="product?.productImageUrlOne" />
+<div class="product-image" (click)="goToProductPage()">
+    <img draggable="false" [src]="product?.productImageUrlOne" />
 </div>
-<ul>
+<ul (click)="goToProductPage()">
     <li>
         <p class="product-title">{{ product?.productTitle }}</p>
     </li>

@@ -5,7 +5,7 @@
             <div class="product-images">
                 <div class="image">
                     <label for="inputFileZero"><img [src]="imageUrls[0]" />
-                        <p>Add an image</p>
+                        <p>Add an image (Main Picture)</p>
                     </label>
                     <input class="input-file" type="file" (change)="onImageAdded($event, 0)" id="inputFileZero" />
                 </div>
@@ -27,6 +27,12 @@
                         <p>Add an image</p>
                     </label>
                     <input class="input-file" type="file" id="inputFileThree" (change)="onImageAdded($event, 3)" />
+                </div>
+                <div class="image">
+                    <label for="inputFileFour"><img [src]="imageUrls[4]" />
+                        <p>Add an image</p>
+                    </label>
+                    <input class="input-file" type="file" id="inputFileFour" (change)="onImageAdded($event, 4)" />
                 </div>
             </div>
         </div>

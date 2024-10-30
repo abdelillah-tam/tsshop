@@ -1,1 +1,31 @@
+<div class="home-div">
+    <section class="slideshow">
+        <div class="first-image">Image Here</div>
+        <div class="half">
+            <div class="second-image">
+                <div>
+                    <h1>Get</h1>
+                    <h1 class="off">-50% <span>off</span></h1>
+                </div>
+                <img
+                    src="https://firebasestorage.googleapis.com/v0/b/tsshop-7a9e2.appspot.com/o/products%2F81GrCeuCzxL._AC_UL320_.jpg?alt=media&token=5c3f6496-de44-4bea-9dfc-96f17f8eba0e" />
+            </div>
+            <div>Image Here</div>
+        </div>
+    </section>
 
+    <h2 style="font-weight: 500; margin-top: 40px;">Top Sellers</h2>
+    <div class="others">
+        <i id="left">
+            <mat-icon class="material-symbols-outlined" fontIcon="chevron_left"></mat-icon>
+        </i>
+        <ul class="top-sellers-ul">
+            @for (item of topSellers; track $index) {
+            <li><app-product-item [product]="item"></app-product-item></li>
+            }
+        </ul>
+        <i id="right">
+            <mat-icon class="material-symbols-outlined" fontIcon="chevron_right"></mat-icon>
+        </i>
+    </div>
+</div>

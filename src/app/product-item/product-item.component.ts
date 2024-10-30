@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../../../model/product';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-product-item',
@@ -12,6 +13,12 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductItemComponent {
 
-  @Input() product : Product | null = null;
+  @Input() product: Product | null = null;
 
+  constructor(private router: Router) {
+  }
+
+  goToProductPage() {
+    this.router.navigate([`product/${this.product?.objectId}`], { state: { productObjectId: this.product?.objectId } });
+  }
 }

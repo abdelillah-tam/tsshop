@@ -18,6 +18,7 @@ const selectFileFeature = createFeatureSelector<{
     imageUrlTwo: string;
     imageUrlThree: string;
     imageUrlFour: string;
+    imageUrlFive: string;
     product: Product
 }>('file');
 
@@ -27,6 +28,14 @@ const selectProductFeature = createFeatureSelector<Product>('product');
 
 export const productSelector = createSelector(selectProductFeature, state => state);
 
+const selectAddProductFeature = createFeatureSelector<Product>('addProduct');
+
+export const addProductSelector = createSelector(selectAddProductFeature, state => state);
+
 const selectProductsFeature = createFeatureSelector<{products:Product[]; count: number}>('products');
 
 export const productsSelector = createSelector(selectProductsFeature, state => state);
+
+const selectTopSellersFeature = createFeatureSelector<Product[]>('top');
+
+export const topSellersSelector = createSelector(selectTopSellersFeature, state => state);

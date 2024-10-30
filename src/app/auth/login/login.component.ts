@@ -21,11 +21,11 @@ export class LoginComponent {
         localStorage.setItem('objectId', data.objectId);
         localStorage.setItem('userToken', data.userToken);
         localStorage.setItem('type', data.type);
+        this.router.navigate(['/dashboard']);
       }
     });
 
     this.store.select(validationSelector).subscribe((result) => {
-      console.log(result);
       if (localStorage.getItem('email') !== null
         && localStorage.getItem('objectId') !== null
         && localStorage.getItem('userToken') !== null

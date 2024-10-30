@@ -5,25 +5,28 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ShopComponent } from './shop/shop.component';
+import { ProductPageComponent } from './product-page/product-page.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
     {
-        title: 'Home',
         path: 'home',
         component: HomeComponent
     },
     {
-        title: 'Login',
         path: 'login',
         component: LoginComponent
     },
     {
-        title: 'Dashboard',
+        path: 'signup',
+        component: SignupComponent
+    },
+    {
         path: 'dashboard',
         component: DashboardComponent,
         children: [
             {
-                title: 'Settings',
                 path: 'settings',
                 component: SettingsComponent
             },
@@ -35,13 +38,20 @@ export const routes: Routes = [
         ]
     },
     {
-        title: 'Add Product',
         path: 'add-product',
         component: AddProductComponent
     },
     {
         path: 'shop',
         component: ShopComponent
+    },
+    {
+        path: 'product/:id',
+        component: ProductPageComponent
+    },
+    {
+        path: 'cart',
+        component: CartComponent
     },
     {
         path: '',

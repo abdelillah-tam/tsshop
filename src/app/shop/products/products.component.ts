@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { getProductsByCategoryAction } from '../../store/actions';
 import { productsSelector } from '../../store/selectors';
 import { Product } from '../../model/product';
-import { ProductItemComponent } from "./product-item/product-item.component";
+import { ProductItemComponent } from '../../product-item/product-item.component';
 
 @Component({
   selector: 'app-products',

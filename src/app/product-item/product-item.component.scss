@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    cursor: pointer;
     img {
         width: 70%;
         height: 70%;
@@ -18,6 +19,7 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     list-style-type: none;
+    cursor: pointer;
     .product-title {
         display: -webkit-box;
         margin-top: 6px;

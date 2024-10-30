@@ -25,5 +25,8 @@
 @media only screen and (max-width: 599px) {
     .products {
         flex-direction: column;
+        .product-item{
+            width: 100%;
+        }
     }
 }
