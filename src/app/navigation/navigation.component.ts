@@ -22,15 +22,15 @@ export class NavigationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
-    .subscribe((result) => {
-      if(result.url === '/shop'){
-        this.click(2);
-      }else if(result.url === '/home'){
-        this.click(1);
-      }else{
-        this.click(3);
-      }
-    })
+      .subscribe((result) => {
+        if (result.url === '/shop') {
+          this.click(7);
+        } else if (result.url === '/home') {
+          this.click(6);
+        } else {
+          this.click(8);
+        }
+      })
   }
 
 
@@ -43,8 +43,8 @@ export class NavigationComponent implements OnInit {
 
   click(index: number) {
     let items = this.element.nativeElement.querySelectorAll('a');
-    // @ts-ignore
-    items.forEach((item, idx) => {
+
+    items.forEach((item: HTMLLinkElement, idx: number) => {
       if (idx === index) {
         item.classList.add('clicked');
       } else {
