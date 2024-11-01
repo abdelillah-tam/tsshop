@@ -46,6 +46,7 @@ body {
 body {
     margin: 0;
     background-color: #e9e8e8;
+    --mat-sidenav-content-background-color: #e9e8e8;
 }
 
 *{
@@ -53,6 +54,6 @@ body {
     margin: 0;
     padding: 0;
     --mat-stepper-header-selected-state-icon-backgrsound-color: green;
+    
 }
 html, body { height: 100%; }
-body { margin: 0;}

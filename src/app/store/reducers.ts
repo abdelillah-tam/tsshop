@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { emptyStateAction, gottenProductAction, gottenProductsAndCountAction, gottenTopSellersAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction, signedupAction, validationResultAction } from "./actions"
+import { addedToCartAction, emptyStateAction, gottenProductAction, gottenProductsAndCountAction, gottenProductsFromCartAction, gottenTopSellersAction, LOGGED_IN_ACTION, loggedInAction, passImageUrlAction, productAddedAction, signedupAction, validationResultAction } from "./actions"
 import { Product } from "../model/product"
 
 export const initialUserState = {
@@ -27,6 +27,10 @@ export const initialProductsState: { products: Product[]; count: number } = { pr
 
 export const initialTopSellersState: Product[] = [];
 
+export const initialAddedToCart = '';
+
+export const initialCartProducts : Product[] = [];
+ 
 export const userReducer = createReducer(initialUserState,
     on(loggedInAction, (state, data) => {
         return {
@@ -85,4 +89,12 @@ export const productsReducer = createReducer(initialProductsState,
 
 export const topSellerProductsReducer = createReducer(initialTopSellersState,
     on(gottenTopSellersAction, (state, data) => data.products)
+);
+
+export const addedToCartReducer = createReducer(initialAddedToCart,
+    on(addedToCartAction, (state, data) => data.objectId)
+);
+
+export const productsFromCart = createReducer(initialCartProducts, 
+    on(gottenProductsFromCartAction, (state, data) => data.products)
 )

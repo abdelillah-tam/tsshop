@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit } from 
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { CurrencyPipe } from '@angular/common';
 import { NavigationComponent } from "./navigation/navigation.component";
 import { CATEGORIES } from './model/categories';
@@ -12,7 +13,7 @@ import { validationSelector } from './store/selectors';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, MatToolbarModule, MatIconModule, CurrencyPipe, NavigationComponent],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet,MatSidenavModule, MatToolbarModule, MatIconModule, CurrencyPipe, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

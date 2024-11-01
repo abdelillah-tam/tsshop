@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store"
 import { Product } from "../model/product";
 import { User } from "../model/user";
+import { CartProduct } from "../model/cart-product";
 
 export const LOGIN_ACTION = '[Login Component] login';
 export const LOGGED_IN_ACTION = '[Effect] logged in successfully';
@@ -18,7 +19,10 @@ export const SIGNUP_ACTION = '[Signup Component] signup';
 export const SIGNEDUP_ACTION = '[Effect] signed up successfully';
 export const TOP_SELLERS = '[Home Component] get top sellers product';
 export const GOTTEN_TOP_SELLERS = '[Effect] top seller products';
-
+export const ADD_TO_CART = '[Cart Component] add to shop cart';
+export const ADDED_TO_CART = '[Effect] added to cart';
+export const GET_FROM_CART = '[Cart Component] get products from cart table';
+export const GOTTEN_FROM_CART = '[Effect] gotten products from cart table';
 
 export const loginAction = createAction(LOGIN_ACTION, props<{ email: string, password: string }>());
 
@@ -56,3 +60,11 @@ export const signedupAction = createAction(SIGNEDUP_ACTION, props<{ user: User }
 export const topSellersAction = createAction(TOP_SELLERS);
 
 export const gottenTopSellersAction = createAction(GOTTEN_TOP_SELLERS, props<{ products: Product[] }>());
+
+export const addToCartAction = createAction(ADD_TO_CART, props<{ product: CartProduct; }>());
+
+export const addedToCartAction = createAction(ADDED_TO_CART, props<{objectId: string}>());
+
+export const getProductsFromCartAction = createAction(GET_FROM_CART);
+
+export const gottenProductsFromCartAction = createAction(GOTTEN_FROM_CART, props<{products: Product[]}>())

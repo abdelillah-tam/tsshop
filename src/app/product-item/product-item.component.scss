@@ -5,11 +5,31 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    position: relative;
     cursor: pointer;
     img {
         width: 70%;
         height: 70%;
         object-fit: contain;
+    }
+    .cart{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        border: black;
+        height: 32px;
+        width: 32px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 999px;
+        top: 5%;
+        right: 5%;
+    }
+    &:hover{
+        .cart{
+            display: flex;
+        }
     }
 }
 

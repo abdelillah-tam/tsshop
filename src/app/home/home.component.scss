@@ -100,12 +100,13 @@
             border-radius: 999px;
             box-shadow: 1px 1px 2px black;
             cursor: pointer;
-            position: absolute;
             height: 40px;
             width: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: absolute;
+            z-index: 99;
         }
 
         #right {
@@ -137,7 +138,6 @@
         }
 
         .others {
-            position: relative;
 
             .top-sellers-ul {
                 grid-auto-columns: 45%;
@@ -147,10 +147,11 @@
                 }
             }
 
-            #left{
+            #left {
                 right: 90%;
             }
-            #right{
+
+            #right {
                 left: 90%;
             }
         }

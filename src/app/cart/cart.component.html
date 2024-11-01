@@ -5,7 +5,48 @@
     <mat-stepper>
         <mat-step editable>
             <ng-template matStepLabel>Shopping Cart</ng-template>
-            <button matStepperNext>Next</button>
+            <div class="products-panel">
+                <div class="products">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th class="product-details">Product Details</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                        @for (item of products; track $index) {
+                        <tr>
+                            <td><img [src]="item.productImageUrlOne" /></td>
+                            <td>
+                                <p class="product-title">{{ item.productTitle }}</p>
+                            </td>
+                            <td>{{ item.productPrice | currency }}</td>
+                            <td class="product-quantity"><button (click)="remove($index)"><mat-icon
+                                        fontIcon="remove"></mat-icon></button>
+                                <p>{{ item.productQuantity }}</p><button class="plus" (click)="add($index)"><mat-icon
+                                        fontIcon="add"></mat-icon></button>
+                            </td>
+                            <td>{{ item.productPrice * item.productQuantity | currency }}</td>
+                        </tr>
+                        }@empty {
+                        <tr>
+                            <td>
+                                <p>No Products On Your Shop Cart</p>
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+                <div class="total">
+                    <div>
+                        <h2>Total Cart</h2>
+                        <p>Total: {{ total | currency }}</p>
+                    </div>
+                    <button class="checkout-btn" matStepperNext>Checkout</button>
+                </div>
+            </div>
+
         </mat-step>
         <mat-step editable>
             <ng-template matStepLabel>Shipping & Checkout</ng-template>

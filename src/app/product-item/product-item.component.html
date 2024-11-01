@@ -1,5 +1,8 @@
-<div class="product-image" (click)="goToProductPage()">
-    <img draggable="false" [src]="product?.productImageUrlOne" />
+<div class="product-image" >
+    <img draggable="false" (click)="goToProductPage()" [src]="product?.productImageUrlOne" />
+    <div class="cart" (click)="addToCart()">
+        <mat-icon class="material-symbols-outlined" fontIcon="shopping_bag"></mat-icon>
+    </div>
 </div>
 <ul (click)="goToProductPage()">
     <li>
@@ -8,7 +11,8 @@
 
     <li style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
         <p style="text-align: center;" class="price">{{ product?.productPrice | currency }}</p>
-        <mat-icon fontIcon="arrow_forward" style="color: #1E1E1E; background-color: darkgray; border-radius: 999px;"></mat-icon>
+        <mat-icon fontIcon="arrow_forward"
+            style="color: #1E1E1E; background-color: darkgray; border-radius: 999px;"></mat-icon>
     </li>
 
 </ul>

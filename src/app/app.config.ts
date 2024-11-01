@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { addProductReducer, fileReducer, productReducer, productsReducer, topSellerProductsReducer, userReducer } from './store/reducers';
+import { addedToCartReducer, addProductReducer, fileReducer, productReducer, productsFromCart, productsReducer, topSellerProductsReducer, userReducer } from './store/reducers';
 import { FileEffects, ProductEffects, UserEffects } from './store/effects';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -20,6 +20,8 @@ export const appConfig: ApplicationConfig = {
   provideState({name: 'addProduct', reducer: addProductReducer}),
   provideState({ name: 'products', reducer: productsReducer }),
   provideState({name: 'top', reducer: topSellerProductsReducer}),
+  provideState({name: 'cart', reducer: addedToCartReducer}),
+  provideState({name: 'cartProducts', reducer: productsFromCart}),
   provideEffects(UserEffects, FileEffects, ProductEffects),
   provideHttpClient(), provideAnimationsAsync()]
 };

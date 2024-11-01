@@ -49,29 +49,6 @@ export class HomeComponent implements OnInit {
 
     });
 
-    // @ts-ignore
-    carousel!.addEventListener('mousedown', (event) => {
-      this.isDragging = true;
-      carousel!.classList.add('dragging');
-      // @ts-ignore
-      this.startX = event.pageX;
-      this.startScrollLeft = carousel!.scrollLeft;
-    });
-
-
-    // @ts-ignore
-    carousel!.addEventListener('mousemove', (event) => {
-      if (!this.isDragging) return;
-      console.log(firstItemWidth);
-      // @ts-ignore
-      carousel!.scrollLeft = this.startScrollLeft - (event.pageX - this.startX);
-    });
-
-    // @ts-ignore
-    carousel!.addEventListener('mouseup', (event) => {
-      this.isDragging = false;
-      carousel!.classList.remove('dragging');
-    })
   }
 
 }

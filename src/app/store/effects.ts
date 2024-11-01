@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "../services/auth/auth.service";
-import { ADD_PRODUCT, GET_PRODUCT, GET_PRODUCTS, gottenProductAction, gottenProductsAndCountAction, gottenTopSellersAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, signedupAction, SIGNUP_ACTION, TOP_SELLERS, UPLOAD_PRODUCT_IMAGE, USER_TOKEN_VALIDATION, validationResultAction } from "./actions";
-import { catchError, exhaustMap, forkJoin, from, map } from "rxjs";
+import { ADD_PRODUCT, ADD_TO_CART, addedToCartAction, GET_FROM_CART, GET_PRODUCT, GET_PRODUCTS, gottenProductAction, gottenProductsAndCountAction, gottenProductsFromCartAction, gottenTopSellersAction, loggedInAction, LOGIN_ACTION, passImageUrlAction, productAddedAction, signedupAction, SIGNUP_ACTION, TOP_SELLERS, UPLOAD_PRODUCT_IMAGE, USER_TOKEN_VALIDATION, validationResultAction } from "./actions";
+import { catchError, exhaustMap, forkJoin, from, lastValueFrom, map } from "rxjs";
 import { FileService } from "../services/file/file.service";
 import { ProductService } from "../services/product/product.service";
 import { Product } from "../model/product";
 import { User } from "../model/user";
+import { CartProduct } from "../model/cart-product";
 
 @Injectable()
 export class UserEffects {
@@ -78,6 +79,8 @@ export class ProductEffects {
     allProducts$;
     product$;
     topSellers$;
+    addToCart$;
+    getProductsFromCart$;
 
     constructor(private actions: Actions, private productService: ProductService) {
         this.add$ = createEffect(() => this.actions.pipe(
@@ -121,9 +124,38 @@ export class ProductEffects {
             ofType(TOP_SELLERS),
             exhaustMap(() => {
                 return this.productService.getTopSeller()
-                .pipe(map(data => {
-                    return gottenTopSellersAction({products: data});
-                }))
+                    .pipe(map(data => {
+                        return gottenTopSellersAction({ products: data });
+                    }))
+            })
+        ));
+
+        this.addToCart$ = createEffect(() => this.actions.pipe(
+            ofType(ADD_TO_CART),
+            exhaustMap((value: { product: CartProduct; }) => {
+                return this.productService
+                    .addToCart(value.product)
+                    .pipe(
+                        map(data => {
+                            return addedToCartAction({ objectId: data.objectId })
+                        })
+                    )
+            })
+        ));
+
+        this.getProductsFromCart$ = createEffect(() => this.actions.pipe(
+            ofType(GET_FROM_CART),
+            exhaustMap(async () => {
+                let cartProducts = await lastValueFrom(this.productService.getProductsFromCart());
+
+                let products: Product[] = [];
+                for (let i = 0; i < cartProducts.length; i++) {
+                    let product = await lastValueFrom(this.productService.getProduct(cartProducts[i].objectId));
+                    product.productQuantity = cartProducts[i].productQuantity;
+                    products = [...products, product];
+                    
+                }
+                return gottenProductsFromCartAction({ products: products });
             })
         ))
     }

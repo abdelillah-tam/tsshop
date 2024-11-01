@@ -39,3 +39,11 @@ export const productsSelector = createSelector(selectProductsFeature, state => s
 const selectTopSellersFeature = createFeatureSelector<Product[]>('top');
 
 export const topSellersSelector = createSelector(selectTopSellersFeature, state => state);
+
+const selectAddedProductToCart = createFeatureSelector<string>('cart');
+
+export const addedToCartSelector = createSelector(selectAddedProductToCart, state => state);
+
+const selectCartProducts = createFeatureSelector<Product[]>('cartProducts');
+
+export const cartProductsSelector = createSelector(selectCartProducts, state => state);
