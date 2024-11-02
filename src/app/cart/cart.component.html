@@ -2,7 +2,7 @@
     <p>Cart</p>
 </header>
 <div class="cart-div">
-    <mat-stepper>
+    <mat-stepper [disableRipple]="true">
         <mat-step editable>
             <ng-template matStepLabel>Shopping Cart</ng-template>
             <div class="products-panel">
@@ -50,9 +50,39 @@
         </mat-step>
         <mat-step editable>
             <ng-template matStepLabel>Shipping & Checkout</ng-template>
+            <form class="shipping" [formGroup]="infosGroup">
+                <label>
+                    Full Name
+                </label>
+                <input formControlName="fullName" placeholder="Full Name" />
+
+                <label style="margin-top: 16px;">
+                    Address
+                </label>
+                <input formControlName="address" placeholder="Address" />
+                <button class="continue-btn" matStepperNext>Continue</button>
+            </form>
         </mat-step>
         <mat-step editable>
             <ng-template matStepLabel>Confirmation</ng-template>
+            <ul class="confirmation-ul">
+                <li>
+                    <div class="checked-icn">
+                        <mat-icon fontIcon="checked"></mat-icon>
+                    </div>
+                    <h3>Your order has been fulfilled</h3>
+                    <p style="color: gray;">I'm grateful. We have received your order.</p>
+                </li>
+                <li>
+                    <h3>Order Details</h3>
+                    <p style="font-weight: bold; margin-top: 24px;">Total:</p>
+                    <p>{{ total | currency}}</p>
+                    <p style="font-weight: bold; margin-top: 16px;">Full Name:</p>
+                    <p>{{ infosGroup.value.fullName }}</p>
+                    <p style="font-weight: bold; margin-top: 16px;">Address:</p>
+                    <p>{{ infosGroup.value.address }}</p>
+                </li>
+            </ul>
         </mat-step>
     </mat-stepper>
 </div>

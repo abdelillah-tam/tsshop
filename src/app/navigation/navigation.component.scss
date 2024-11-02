@@ -20,15 +20,17 @@
         flex-basis: 40%;
         justify-content: space-evenly;
         align-items: center;
-        a{
+
+        a {
             color: #FFD701;
-            &:not(.clicked){
+
+            &:not(.clicked) {
                 color: white;
             }
         }
     }
 
-    .a-categories {
+    .home {
         background-color: #FFD701;
         color: #1E1E1E;
         display: flex;
@@ -38,45 +40,7 @@
         padding-right: 12px;
         position: relative;
         cursor: pointer;
-        .arrow{
-            display: none;
-        }
 
-        .categories {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            position: absolute;
-            color: black;
-            list-style-type: none;
-            background-color: white;
-            top: 100%;
-            left: 0;
-            .category-item {
-                height: 56px;
-                display: flex;
-                align-items: center;
-                padding-left: 12px;
-                padding-right: 12px;
-                font-size: 14px;
-                &:hover{
-                    background-color: #e9e8e8;
-                }
-            }
-        }
-
-        @media only screen and (min-width: 600px) {
-            &:hover {
-                .categories {
-                    height: auto;
-                    width: 100%;
-                    animation: animate-categories;
-                    animation-duration: 500ms;
-                }
-            }
-        }
     }
 
     .free-div {
@@ -103,6 +67,7 @@
         padding-left: 0;
         padding-right: 0;
         background-color: white;
+
         .menu-list {
             width: 100%;
             flex-basis: 0;
@@ -111,55 +76,28 @@
             align-items: start;
             z-index: 33;
             color: #1E1E1E;
-            a{
+
+            a {
                 color: base.$black;
-                &:not(.clicked){
+
+                &:not(.clicked) {
                     color: base.$black;
                 }
             }
         }
 
-        .a-categories {
+        .home {
             width: 100%;
             background-color: white;
             color: #1E1E1E;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: start;
+            align-items: start;
             padding-left: 0;
             padding-right: 0;
             cursor: pointer;
 
-            .arrow{
-                display: inherit;
-            }
-
-            
-            .categories {
-                width: 100%;
-                color: black;
-                list-style-type: none;
-                background-color: white;
-                top: 0;
-                left: 0;
-                position: relative;
-
-                .category-item {
-                    padding-left: 28px;
-                }
-            }
-
-            .show-categories {
-                width: 100%;
-                height: 100%;
-                animation: animate-categories;
-                animation-duration: 500ms;
-            }
-
-            .menu-icon {
-                display: none;
-            }
 
 
         }

@@ -1,29 +1,16 @@
 <nav class="nav-menu">
-    <a class="a-categories" (click)="showCategories()">
-        <div style="width: 100%;display: flex; justify-content: space-between; align-items: center; padding: 16px;">
-            <div style="display: flex; justify-content: start; align-items: center;">
-                <mat-icon class="menu-icon">menu</mat-icon>
-                <p>All Categories</p>
-            </div>
-            <mat-icon class="arrow"
-                [fontIcon]="openedCategories ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"></mat-icon>
-        </div>
-        <ul class="categories">
-            @for (item of categories; track $index) {
-            <li class="category-item"><a href="#">{{ item }}</a></li>
-            }
-        </ul>
-    </a>
+    <div class="home">
+        <a style="display: flex; justify-content: start; align-items: center; padding: 16px;" routerLink="home"
+            routerLinkActive="active">
+            <mat-icon class="home-icon material-symbols-outlined" fontIcon="home"></mat-icon>
+            <p>Home</p>
+        </a>
+    </div>
 
 
     <ul class="menu-list">
-        <li style="padding: 16px;"><a style="cursor: pointer;" routerLink="home" routerLinkActive="active"
-            id="home"
-        
-                (click)="click(1)">Home</a></li>
-        <li style="padding: 16px; cursor: pointer;"><a style="cursor: pointer;" routerLink="shop"
-            id="shop"
-                routerLinkActive="active" (click)="click(2)">Shop</a></li>
+        <li style="padding: 16px; cursor: pointer;"><a style="cursor: pointer;" routerLink="shop" id="shop"
+                routerLinkActive="active" (click)="click(1)">Shop</a></li>
     </ul>
     <div class="free-div">
         <p>*Free Shipping On Orders <span style="color: red;">+{{ 500 | currency :'USD' : 'symbol' :
