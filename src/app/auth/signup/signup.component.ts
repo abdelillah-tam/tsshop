@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
     this.store.select(userSelector).subscribe((result) => {
       if (result.email.length > 0 && !result.valid) {
         this.router.navigate(['/login']);
-      }else{
+      } else {
         this.router.navigate(['/dashboard']);
       }
     });
@@ -46,11 +46,13 @@ export class SignupComponent implements OnInit {
   signup() {
     if (this.signupGroup.valid) {
       this.disabledBtn = true;
-      let user = new User(this.signupGroup.value.firstName!,
-        this.signupGroup.value.lastName!,
-        this.signupGroup.value.email!,
-        'user',
-        '');
+      let user: User = {
+        firstname: this.signupGroup.value.firstName!,
+        lastname: this.signupGroup.value.lastName!,
+        email: this.signupGroup.value.email!,
+        type: 'user',
+        objectId: ''
+      };
       this.store.dispatch(signupAction({ user: user, password: this.signupGroup.value.password! }));
     }
   }

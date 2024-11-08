@@ -2,7 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-@use 'base' as base;
+@use './base' as base;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -53,7 +53,14 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    --mat-stepper-header-selected-state-icon-backgrsound-color: green;
     
 }
+
+.mat-primary {
+  --mat-stepper-header-selected-state-icon-background-color: #FFD701;
+  --mat-stepper-header-edit-state-icon-background-color: #FFD701;
+  --mat-stepper-header-selected-state-icon-foreground-color: base.$black;
+  --mat-stepper-header-edit-state-icon-foreground-color: base.$black;
+}
+
 html, body { height: 100%; }

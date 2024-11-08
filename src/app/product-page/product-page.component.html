@@ -2,13 +2,14 @@
     <li class="images-li">
         <div class="first-img"><img [src]="product?.productImageUrlTwo" /></div>
         <div><img [src]="product?.productImageUrlThree" /></div>
-        <div><img [src]="product?.productImageUrlFour"/></div>
-        <div><img [src]="product?.productImageUrlFive"/></div>
+        <div><img [src]="product?.productImageUrlFour" /></div>
+        <div><img [src]="product?.productImageUrlFive" /></div>
     </li>
     <li class="info-li">
         <h2>{{ product?.productTitle }}</h2>
         <p class="price-p">{{ product?.productPrice | currency }}</p>
-        <button><mat-icon class="material-symbols-outlined" fontIcon="shopping_bag"></mat-icon>Add to cart</button>
+        <button style="cursor: pointer;" (click)="addToCart()"><mat-icon class="material-symbols-outlined"
+                fontIcon="shopping_bag"></mat-icon>Add to cart</button>
         <p style="margin-top: 24px;">Product Description</p>
         <p class="paragraph-p">{{ product?.productDescription }}</p>
     </li>

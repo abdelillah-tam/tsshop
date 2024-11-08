@@ -6,17 +6,16 @@ header {
     justify-content: center;
     width: 100%;
     padding: 24px;
-
     p {
         font-size: 2rem;
     }
 }
 
+
 .cart-div {
-
     --mat-stepper-container-color: transparent;
-    --mat-stepper-header-selected-state-icon-background-color: green;
-
+    --mat-stepper-header-selected-state-icon-background-color: green !important;
+    height: calc(100% - 48px);
     padding: 0 base.$padding;
 
     .checkout-btn,

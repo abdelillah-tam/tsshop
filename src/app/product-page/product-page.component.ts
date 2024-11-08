@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Product } from '../model/product';
-import { getProductAction } from '../store/actions';
+import { addToCartAction, getProductAction } from '../store/actions';
 import { productSelector } from '../store/selectors';
 import { CurrencyPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { CartProduct } from '../model/cart-product'
 
 @Component({
   selector: 'app-product-page',
@@ -35,6 +36,14 @@ export class ProductPageComponent implements OnInit {
   }
 
 
-
+  addToCart() {
+    this.store.dispatch(addToCartAction({
+      product: {
+        objectId: this.product!.objectId,
+        productQuantity: 1,
+        ownerId: localStorage.getItem('objectId')!
+      }
+    }))
+  }
 
 }

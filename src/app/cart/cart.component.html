@@ -2,7 +2,7 @@
     <p>Cart</p>
 </header>
 <div class="cart-div">
-    <mat-stepper [disableRipple]="true">
+    <mat-stepper [disableRipple]="true" [linear]="true">
         <mat-step editable>
             <ng-template matStepLabel>Shopping Cart</ng-template>
             <div class="products-panel">
@@ -41,14 +41,14 @@
                 <div class="total">
                     <div>
                         <h2>Total Cart</h2>
-                        <p>Total: {{ total | currency }}</p>
+                        <output>Total: {{ total | currency }}</output>
                     </div>
                     <button class="checkout-btn" matStepperNext>Checkout</button>
                 </div>
             </div>
 
         </mat-step>
-        <mat-step editable>
+        <mat-step editable [stepControl]="infosGroup">
             <ng-template matStepLabel>Shipping & Checkout</ng-template>
             <form class="shipping" [formGroup]="infosGroup">
                 <label>

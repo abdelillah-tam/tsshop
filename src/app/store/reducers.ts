@@ -16,12 +16,40 @@ export const initialFileState = {
     imageUrlThree: '',
     imageUrlFour: '',
     imageUrlFive: '',
-    product: new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0)
+    product: {}
 }
 
-export const initialProductState: Product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
+export const initialProductState: Product = {
+    objectId: '',
+    productCategory: '',
+    productDescription: '',
+    productID: '',
+    productImageUrlFive: '',
+    productImageUrlFour: '',
+    productImageUrlThree: '',
+    productImageUrlTwo: '',
+    productImageUrlOne: '',
+    productPrice: 0,
+    productQuantity: 0,
+    productSells: 0,
+    productTitle: ''
+};
 
-export const initialAddProductState: Product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
+export const initialAddProductState: Product = {
+    objectId: '',
+    productCategory: '',
+    productDescription: '',
+    productID: '',
+    productImageUrlFive: '',
+    productImageUrlFour: '',
+    productImageUrlThree: '',
+    productImageUrlTwo: '',
+    productImageUrlOne: '',
+    productPrice: 0,
+    productQuantity: 0,
+    productSells: 0,
+    productTitle: ''
+};
 
 export const initialProductsState: { products: Product[]; count: number } = { products: [], count: 0 };
 
@@ -29,8 +57,8 @@ export const initialTopSellersState: Product[] = [];
 
 export const initialAddedToCart = '';
 
-export const initialCartProducts : Product[] = [];
- 
+export const initialCartProducts: Product[] = [];
+
 export const userReducer = createReducer(initialUserState,
     on(loggedInAction, (state, data) => {
         return {
@@ -95,6 +123,6 @@ export const addedToCartReducer = createReducer(initialAddedToCart,
     on(addedToCartAction, (state, data) => data.objectId)
 );
 
-export const productsFromCart = createReducer(initialCartProducts, 
+export const productsFromCart = createReducer(initialCartProducts,
     on(gottenProductsFromCartAction, (state, data) => data.products)
 )

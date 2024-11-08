@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
 
   price: number = 0;
 
-  product = new Product('', '', '', '', '', '', '', '', 0, '', '', 0, 0);
+  product: Product | null = null;
 
   productGroup = new FormGroup({
     productTitle: new FormControl('', [Validators.required]),
@@ -115,13 +115,23 @@ export class AddProductComponent implements OnInit {
 
   save() {
     if (this.productGroup.valid) {
-      this.product.productID = `${Date.now()}`;
-      this.product.productTitle = this.productGroup.value.productTitle!;
-      this.product.productCategory = this.productGroup.value.productCategory!;
-      this.product.productDescription = this.productGroup.value.productDescription!;
-      this.product.productQuantity = parseInt(this.productGroup.value.productQuantity!);
-      this.product.productPrice = this.productGroup.value.productPrice!;
-      this.store.dispatch(uploadProductImageAction({ file: this.files, product: this.product }));
+      this.store.dispatch(uploadProductImageAction({
+        file: this.files, product: {
+          productID: `${Date.now()}`,
+          productTitle: this.productGroup.value.productTitle!,
+          productCategory: this.productGroup.value.productCategory!,
+          productDescription: this.productGroup.value.productDescription!,
+          productQuantity: parseInt(this.productGroup.value.productQuantity!),
+          productPrice: this.productGroup.value.productPrice!,
+          objectId: '',
+          productImageUrlOne: '',
+          productImageUrlTwo: '',
+          productImageUrlThree: '',
+          productImageUrlFour: '',
+          productImageUrlFive: '',
+          productSells: 0
+        }
+      }));
 
 
       this.disabledBtn = true;

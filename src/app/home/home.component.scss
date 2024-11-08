@@ -6,11 +6,12 @@
     margin-top: 16px;
 
     .slideshow {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
         width: 100%;
         height: 400px;
-        gap: 2%;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(2, 50%);
+        gap: 16px;
 
         div {
             background-color: white;
@@ -24,60 +25,57 @@
 
         .first-image {
             height: 100%;
-            flex-basis: 50%;
+            width: 100%;
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 3;
         }
 
-        .half {
-            flex-basis: 50%;
-            display: flex;
-            flex-direction: column;
+        .second-image {
             height: 100%;
-            gap: 5%;
-            background-color: transparent;
-
-            .second-image {
-                width: 100%;
-
-                div {
-                    display: flex;
-                    flex-direction: column;
-
-                    h1 {
-                        font-size: 2.5rem;
-                    }
-
-                    .off {
-                        display: flex;
-                        align-items: center;
-                        gap: 5%;
-                        color: red;
-                        text-align: center;
-                        font-size: 3rem;
-                        font-weight: bolder;
-                        display: flex;
-
-                        span {
-                            color: base.$black;
-                            font-size: 2.5rem;
-                        }
-                    }
-                }
-
-                img {
-                    padding: 24px;
-                    flex-basis: 25%;
-                    height: 100%;
-                }
-            }
+            width: 100%;
 
             div {
-                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                h1 {
+                    font-size: 2.5rem;
+                }
+
+                .off {
+                    display: flex;
+                    align-items: center;
+                    color: red;
+                    text-align: center;
+                    font-size: 3rem;
+                    font-weight: bolder;
+                    display: flex;
+
+                    span {
+                        color: base.$black;
+                        font-size: 2.5rem;
+                    }
+                }
+            }
+
+            img {
+                padding: 24px;
+                height: 100%;
             }
         }
+
+        .third-image {
+            height: 100%;
+            width: 100%;
+        }
+
     }
 
     .others {
         position: relative;
+
         .top-sellers-ul {
             list-style-type: none;
             display: grid;
