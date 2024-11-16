@@ -33,10 +33,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(getProductsFromCartAction());
     this.store.select(userSelector).subscribe((result) => {
-      if (result.valid && localStorage.length === 4) {
+      if (result.valid) {
       }
       else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     });
     this.store.select(cartProductsSelector).subscribe((result) => {

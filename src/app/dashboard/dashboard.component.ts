@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { userSelector } from '../store/selectors';
-import { emptyStateAction, userTokenValidationAction } from '../store/actions';
+import { emptyStateAction } from '../store/actions';
 
 @Component({
   selector: 'app-dashboard',

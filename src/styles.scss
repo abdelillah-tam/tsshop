@@ -40,7 +40,7 @@ $TSshop-theme: mat.define-theme((
 html,
 body {
     height: 100%;
-    font-family: Inter, sans-serif;
+    font-family: "Inter", serif;
 }
 
 body {
@@ -62,5 +62,6 @@ body {
   --mat-stepper-header-selected-state-icon-foreground-color: base.$black;
   --mat-stepper-header-edit-state-icon-foreground-color: base.$black;
 }
+
 
 html, body { height: 100%; }

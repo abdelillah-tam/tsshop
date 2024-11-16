@@ -1,8 +1,8 @@
-<ul class="products" style="list-style-type: none;">
+<ul class="products" style="list-style: none;">
     @for (item of products; track $index) {
     <app-product-item class="product-item" [product]="item"></app-product-item>
     }@empty {
-    <li>
+    <li class="no-product">
         <p>No Products</p>
     </li>
     }

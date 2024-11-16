@@ -1,30 +1,95 @@
 <div class="home-div">
-    <section class="slideshow">
-        <div class="first-image">Image Here</div>
-        <div class="second-image">
-            <div>
-                <h1>Get</h1>
-                <h1 class="off">-50% <span>off</span></h1>
-            </div>
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/tsshop-7a9e2.appspot.com/o/products%2F81GrCeuCzxL._AC_UL320_.jpg?alt=media&token=5c3f6496-de44-4bea-9dfc-96f17f8eba0e" />
-        </div>
-        <div class="third-image">Image Here</div>
-    </section>
-
-    <h2 style="font-weight: 500; margin-top: 40px;">Top Sellers</h2>
-    <div class="others">
-        <i id="left">
-            <mat-icon class="material-symbols-outlined" fontIcon="chevron_left"></mat-icon>
-        </i>
-        <i id="right">
-            <mat-icon class="material-symbols-outlined" fontIcon="chevron_right"></mat-icon>
-        </i>
-        <ul class="top-sellers-ul">
-            @for (item of topSellers; track $index) {
-            <li><app-product-item [product]="item"></app-product-item></li>
-            }
-        </ul>
-
+  <section class="slideshow">
+    <div class="first-image">
+      <div class="image-div">
+        <img src="mobile-banner.jpg" />
+      </div>
     </div>
+    <div class="second-image">
+      <div>
+        <h1>Get</h1>
+        <h1 class="off-h1">-50% <span>off</span></h1>
+      </div>
+      <div class="image-div">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/tsshop-7a9e2.appspot.com/o/products%2F81GrCeuCzxL._AC_UL320_.jpg?alt=media&token=5c3f6496-de44-4bea-9dfc-96f17f8eba0e"
+        />
+      </div>
+    </div>
+    <div class="third-image">
+      <div class="image-div">
+        <img src="banner-two.jpg" />
+      </div>
+    </div>
+  </section>
+
+  <ul class="categories-icons">
+    <li>
+      <a href="#"><img src="gaming-icon.png" /></a>
+    </li>
+    <li>
+      <a href="#"><img src="laptop-screen.png" /></a>
+    </li>
+    <li>
+      <a href="#"><img src="mobile.png" /></a>
+    </li>
+    <li>
+      <a href="#"><img src="desktop.png" /></a>
+    </li>
+    <li>
+      <a href="#"><img src="smart-house.png" /></a>
+    </li>
+  </ul>
+
+  <h2 style="font-weight: 500; margin-top: 10%">Top Sellers</h2>
+  <div class="others">
+    <i #previous id="left">
+      <mat-icon
+        class="material-symbols-outlined"
+        fontIcon="chevron_left"
+      ></mat-icon>
+    </i>
+    <i #next id="right">
+      <mat-icon
+        class="material-symbols-outlined"
+        fontIcon="chevron_right"
+      ></mat-icon>
+    </i>
+    <ul #carousel class="top-sellers-ul">
+      @for (item of topSellers; track $index) {
+      <li #productItem class="top-product-item"><app-product-item [product]="item"></app-product-item></li>
+      }
+    </ul>
+  </div>
+
+  <ul class="infos-ul">
+    <li>
+      <img src="delivery.png" />
+      <div>
+        <p style="font-weight: bolder">Free Delivery</p>
+        <p>From {{ 50 | currency }}</p>
+      </div>
+    </li>
+    <li>
+      <img src="tag.png" />
+      <div>
+        <p style="font-weight: bolder">Only Best</p>
+        <p>Brands</p>
+      </div>
+    </li>
+    <li>
+      <img src="credit-card.png" />
+      <div>
+        <p style="font-weight: bolder">Payment</p>
+        <p>Secure System</p>
+      </div>
+    </li>
+    <li>
+      <img src="box.png" />
+      <div>
+        <p style="font-weight: bolder">365 Days</p>
+        <p>For Free Return</p>
+      </div>
+    </li>
+  </ul>
 </div>

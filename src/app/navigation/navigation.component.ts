@@ -1,55 +1,60 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CATEGORIES } from '../model/categories';
-import { NavigationEnd, Route, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  NavigationEnd,
+  Route,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [MatIconModule, CurrencyPipe, RouterLink, RouterLinkActive],
+  imports: [
+    MatIconModule,
+    CurrencyPipe,
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+  ],
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+  styleUrl: './navigation.component.scss',
 })
 export class NavigationComponent implements OnInit {
-
   openedCategories = false;
 
   categories = CATEGORIES;
 
-  constructor(private element: ElementRef, private router: Router) {
-  }
+  currentMenuItem = 0;
+
+  categoriesClicked = false;
+
+  constructor(private router: Router) {}
   ngOnInit(): void {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((result) => {
-        if (result.url === '/shop') {
-          this.click(7);
-        } else if (result.url === '/home') {
-          this.click(6);
-        } else {
-          this.click(8);
+        if (result.url === '/') {
+          this.select(0);
+        } else if (result.url.startsWith('/shop')) {
+          this.select(1);
         }
-      })
+      });
   }
 
-
-  showCategories() {
-    let element = this.element.nativeElement.querySelector('.categories');
-    element.classList.toggle('show-categories');
-    this.openedCategories = element.classList.contains('show-categories')
-
+  select(index: number) {
+    this.currentMenuItem = index;
   }
 
-  click(index: number) {
-    let items = this.element.nativeElement.querySelectorAll('a');
+  clickOnCategories() {
+    this.categoriesClicked = !this.categoriesClicked;
+  }
 
-    items.forEach((item: HTMLLinkElement, idx: number) => {
-      if (idx === index) {
-        item.classList.add('clicked');
-      } else {
-        item.classList.remove('clicked');
-      }
-    })
+  goToCategory(index: number){
+    this.router.navigate([`/shop/${this.categories[index]}`]);
   }
 }

@@ -8,7 +8,7 @@
             <p>Categories</p>
             <ul>
                 @for (item of categories; track $index) {
-                <li (click)="choose($index)" [className]="$index === 0 ? 'clicked': ''">{{ item }}</li>
+                <li (click)="choose($index)" [className]="$index === categoryIndex ? 'clicked': ''">{{ item }}</li>
                 }
             </ul>
         </div>

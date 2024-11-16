@@ -1,157 +1,253 @@
-@use '../../base' as base;
+@use "../../base" as base;
 
 .home-div {
-    padding-right: base.$padding;
-    padding-left: base.$padding;
-    margin-top: 16px;
+  padding-right: base.$padding;
+  padding-left: base.$padding;
+  margin-top: 16px;
 
-    .slideshow {
-        display: grid;
+  .slideshow {
+    display: grid;
+    width: 100%;
+    height: 400px;
+    grid-template-columns: repeat(2, calc(50% - 8px));
+    grid-template-rows: repeat(2, calc(50% - 8px));
+    gap: 16px;
+    overflow: hidden;
+    div {
+      background-color: white;
+      height: 48%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: base.$black;
+    }
+
+    .first-image {
+      height: 100%;
+      width: 100%;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      overflow: hidden;
+
+      .image-div {
+        flex-basis: 100%;
+        height: 100%;
         width: 100%;
-        height: 400px;
-        grid-template-columns: repeat(2, 50%);
-        grid-template-rows: repeat(2, 50%);
-        gap: 16px;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
 
-        div {
-            background-color: white;
-            height: 48%;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .second-image {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      overflow: hidden;
+      div {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 60%;
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .off-h1 {
+          display: flex;
+          align-items: center;
+          color: red;
+          text-align: center;
+          font-size: 3rem;
+          font-weight: bolder;
+          display: flex;
+
+          span {
             color: base.$black;
+            font-size: 2.5rem;
+          }
         }
-
-        .first-image {
-            height: 100%;
-            width: 100%;
-            grid-column-start: 1;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 3;
+      }
+      .image-div {
+        flex-basis: 40%;
+        height: 100%;
+        width: 100%;
+        img {
+          padding: 24px;
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
         }
-
-        .second-image {
-            height: 100%;
-            width: 100%;
-
-            div {
-                display: flex;
-                flex-direction: column;
-
-                h1 {
-                    font-size: 2.5rem;
-                }
-
-                .off {
-                    display: flex;
-                    align-items: center;
-                    color: red;
-                    text-align: center;
-                    font-size: 3rem;
-                    font-weight: bolder;
-                    display: flex;
-
-                    span {
-                        color: base.$black;
-                        font-size: 2.5rem;
-                    }
-                }
-            }
-
-            img {
-                padding: 24px;
-                height: 100%;
-            }
-        }
-
-        .third-image {
-            height: 100%;
-            width: 100%;
-        }
-
+      }
     }
 
-    .others {
-        position: relative;
-
-        .top-sellers-ul {
-            list-style-type: none;
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 25%;
-            overflow: hidden;
-            width: 100%;
-            margin-top: 8px;
-            gap: 2%;
-            scroll-behavior: smooth;
-
-            li {
-                width: 100%;
-            }
+    .third-image {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      .image-div {
+        flex-basis: 100%;
+        height: 100%;
+        width: 100%;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
         }
-
-        #left,
-        #right {
-            background-color: white;
-            border-radius: 999px;
-            box-shadow: 1px 1px 2px black;
-            cursor: pointer;
-            height: 40px;
-            width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            z-index: 99;
-        }
-
-        #right {
-            left: 100%;
-            bottom: 50%;
-            margin-left: 8px;
-        }
-
-        #left {
-            bottom: 50%;
-            right: 100%;
-            margin-right: 8px;
-        }
+      }
     }
+  }
+
+  .categories-icons {
+    width: 100%;
+    list-style: none;
+    display: grid;
+    grid-auto-columns: calc(100% / 5);
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 10%;
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      a {
+        background-color: white;
+        width: 128px;
+        height: 128px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 999px;
+      }
+    }
+  }
+
+  .others {
+    position: relative;
+
+    .top-sellers-ul {
+      list-style-type: none;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 25%;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 16px;
+      gap: 2%;
+      scroll-behavior: smooth;
+
+      li {
+        width: 100%;
+      }
+    }
+
+    #left,
+    #right {
+      background-color: white;
+      border-radius: 999px;
+      box-shadow: 1px 1px 2px black;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      z-index: 99;
+    }
+
+    #right {
+      left: 100%;
+      bottom: 50%;
+      margin-left: 8px;
+    }
+
+    #left {
+      bottom: 50%;
+      right: 100%;
+      margin-right: 8px;
+    }
+  }
+
+  .infos-ul {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    justify-content: space-between;
+    user-select: none;
+    & > li {
+      display: flex;
+      align-items: center;
+      div {
+        margin-left: 8px;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 599px) {
-    .home-div {
-        padding-left: base.$mobile_padding;
-        padding-right: base.$mobile_padding;
+  .home-div {
+    padding-left: base.$mobile_padding;
+    padding-right: base.$mobile_padding;
 
-        .slideshow {
-            flex-direction: column;
-
-            .first-image {
-                display: none;
-            }
-
-        }
-
-        .others {
-
-            .top-sellers-ul {
-                grid-auto-columns: 45%;
-
-                &.dargging {
-                    user-select: none;
-                }
-            }
-
-            #left {
-                right: 90%;
-            }
-
-            #right {
-                left: 90%;
-            }
-        }
+    .slideshow {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      .first-image {
+        display: none;
+      }
     }
+
+    .categories-icons {
+      li {
+        a {
+          width: 64px;
+          height: 64px;
+          img {
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+    }
+
+    .others {
+      .top-sellers-ul {
+        grid-auto-columns: 45%;
+
+        &.dargging {
+          user-select: none;
+        }
+      }
+
+      #left {
+        right: 90%;
+      }
+
+      #right {
+        left: 90%;
+      }
+    }
+
+    .infos-ul {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      & > li {
+        margin-top: 8px;
+        width: 50%;
+      }
+    }
+  }
 }

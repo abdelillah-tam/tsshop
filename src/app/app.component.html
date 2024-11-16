@@ -1,67 +1,84 @@
-<mat-sidenav-container style="height: 100%;">
-    <mat-sidenav #drawer mode="over">
-        <app-navigation></app-navigation>
-    </mat-sidenav>
+<mat-sidenav-container style="height: 100%">
+  <mat-sidenav #drawer mode="over">
+    <app-navigation></app-navigation>
+  </mat-sidenav>
 
-    <header>
-        <mat-toolbar>
+  <header>
+    <mat-toolbar>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <a class="menu-a" (click)="drawer.toggle()"
+          ><mat-icon
+            class="material-symbols-outlined"
+            fontIcon="menu"
+          ></mat-icon
+        ></a>
+        <div class="logo-div">
+          <a routerLink="" routerLinkActive="active"
+            ><img class="logo-img" src="logo.png"
+          /></a>
+        </div>
+      </div>
+      <div class="search-div">
+        <input class="search-input" />
+        <div class="search-icon-div">
+          <mat-icon
+            class="material-symbols-outlined"
+            fontIcon="search"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="options-div">
+        @if(userType !== null && userType === 'owner' && userTokenValidation){
+        <div style="cursor: pointer" (click)="navigateToAddProduct()">
+          <mat-icon class="material-symbols-outlined" fontIcon="add"></mat-icon>
+        </div>
+        <div
+          style="cursor: pointer"
+          routerLink="/cart"
+          routerLinkActive="active"
+        >
+          <mat-icon
+            class="material-symbols-outlined"
+            fontIcon="shopping_bag"
+          ></mat-icon>
+        </div>
+        }
 
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <a class="menu-a" (click)="drawer.toggle()"><mat-icon class="material-symbols-outlined"
-                        fontIcon="menu"></mat-icon></a>
-                <div class="logo-div">
-                    <a routerLink="home" routerLinkActive="active"><img class="logo-img" src="logo.png" /></a>
-                </div>
-            </div>
-            <div class="search-div">
-                <input class="search-input" />
-                <div class="search-icon-div">
-                    <mat-icon class="material-symbols-outlined" fontIcon="search"></mat-icon>
-                </div>
-            </div>
-            <div class="options-div">
-                @if(userType !== null && userType === 'owner' && userTokenValidation){
-                <div style="cursor: pointer;" (click)="navigateToAddProduct()">
-                    <mat-icon class="material-symbols-outlined" fontIcon="add"></mat-icon>
-                </div>
-                <div style="cursor: pointer;" routerLink="/cart" routerLinkActive="active">
-                    <mat-icon class="material-symbols-outlined" fontIcon="shopping_bag"></mat-icon>
-                </div>
-                }
-
-                <div style="cursor: pointer;" (click)="clickRequest()">
-                    <mat-icon class="material-symbols-outlined" fontIcon="person"></mat-icon>
-                </div>
-            </div>
-        </mat-toolbar>
-        <div class="background"></div>
-        <app-navigation class="navigator"></app-navigation>
-
-    </header>
+        <div style="cursor: pointer" (click)="clickRequest()">
+          <mat-icon
+            class="material-symbols-outlined"
+            fontIcon="person"
+          ></mat-icon>
+        </div>
+      </div>
+    </mat-toolbar>
+    <app-navigation class="navigator"></app-navigation>
+  </header>
+  <main class="main-content">
     <router-outlet />
-    <footer>
-        <ul class="more">
-            <li class="pages">
-                <h2>Pages</h2>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">All Collections</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms and Conditions</a></li>
-                </ul>
-            </li>
-            <li class="about-us">
-                <h2>About Us</h2>
-                <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Whishlist</a></li>
-                    <li><a href="#">Shopping Cart</a></li>
-                    <li><a href="#">Shipping and Return</a></li>
-                    <li><a href="#">FAQ's</a></li>
-                </ul>
-            </li>
+  </main>
+  <footer>
+    <ul class="more">
+      <li class="pages">
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">All Collections</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms and Conditions</a></li>
         </ul>
-    </footer>
-
+      </li>
+      <li class="about-us">
+        <h2>About Us</h2>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Whishlist</a></li>
+          <li><a href="#">Shopping Cart</a></li>
+          <li><a href="#">Shipping and Return</a></li>
+          <li><a href="#">FAQ's</a></li>
+        </ul>
+      </li>
+    </ul>
+  </footer>
 </mat-sidenav-container>

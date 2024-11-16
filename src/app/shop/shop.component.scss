@@ -1,95 +1,80 @@
-@use '../../base' as base;
+@use "../../base" as base;
 
 header {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 24px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 24px;
 
-    p {
-        font-size: 2rem;
-    }
+  p {
+    font-size: 2rem;
+  }
 }
 
 .products-panel {
-    display: flex;
-    justify-content: space-between;
-    padding-left: base.$padding;
-    padding-right: base.$padding;
-    aside {
-        flex-basis: 24%;
-        margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: base.$padding;
+  padding-right: base.$padding;
+  overflow: hidden;
+  aside {
+    flex-basis: 24%;
+    margin-top: 16px;
 
-        div {
-            border-width: 1px;
-            border-color: lightgray;
-            border-style: solid;
-            border-radius: 6px;
-            background-color: white;
+    div {
+      border-width: 1px;
+      border-color: lightgray;
+      border-style: solid;
+      border-radius: 6px;
+      background-color: white;
 
-            p {
-                padding: 16px 12px;
-                border-bottom-width: 1px;
-                border-bottom-color: lightgray;
-                border-bottom-style: solid;
-                font-weight: 500;
-                font-size: 19px;
-                color: base.$black
-            }
+      p {
+        padding: 16px 12px;
+        border-bottom-width: 1px;
+        border-bottom-color: lightgray;
+        border-bottom-style: solid;
+        font-weight: 500;
+        font-size: 19px;
+        color: base.$black;
+      }
 
-            ul {
-                list-style-type: none;
+      ul {
+        list-style-type: none;
 
-                li {
-                    padding: 16px 12px;
-                    color: base.$black;
-                    cursor: pointer;
+        li {
+          padding: 16px 12px;
+          color: base.$black;
+          cursor: pointer;
 
-                    &:not(.clicked) {
-                        color: gray;
-                    }
-                }
-            }
+          &:not(.clicked) {
+            color: gray;
+          }
         }
+      }
+    }
+  }
+
+  section {
+    flex-basis: 74%;
+    margin-top: 16px;
+    border-radius: 6px;
+
+    p {
+      background-color: white;
+      border-radius: 6px;
+      font-size: 19px;
+      padding: 16px 12px;
+      font-weight: 500;
     }
 
-    section {
-        flex-basis: 74%;
-        margin-top: 16px;
-        border-radius: 6px;
-
-        p {
-            background-color: white;
-            border-radius: 6px;
-            font-size: 19px;
-            padding: 16px 12px;
-            font-weight: 500;
-        }
-
-        
-
-        .counter-ul {
-            display: flex;
-            list-style-type: none;
-            justify-content: center;
-            margin-bottom: 24px;
-            li {
-                cursor: pointer;
-                .counter {
-                    background-color: base.$yellow;
-                    margin-right: 4px;
-                }
-            }
-        }
-    }
+  }
 }
 
 @media only screen and (max-width: 599px) {
-    .products-panel {
-        flex-direction: column;
-        padding-left: base.$mobile_padding;
-        padding-right: base.$mobile_padding;
-
-    }
+  .products-panel {
+    flex-direction: column;
+    padding-left: base.$mobile_padding;
+    padding-right: base.$mobile_padding;
+  }
 }

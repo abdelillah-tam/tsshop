@@ -14,10 +14,8 @@ header {
 
 .cart-div {
     --mat-stepper-container-color: transparent;
-    --mat-stepper-header-selected-state-icon-background-color: green !important;
-    height: calc(100% - 48px);
     padding: 0 base.$padding;
-
+    
     .checkout-btn,
     .continue-btn {
         background-color: base.$yellow;
@@ -163,7 +161,7 @@ header {
 
             .products {
                 width: 100%;
-                overflow-x: scroll;
+                overflow: scroll;
             }
 
             .total {
