@@ -6,7 +6,7 @@ import {
   gottenProductsAndCountAction,
   gottenProductsFromCartAction,
   gottenTopSellersAction,
-  LOGGED_IN_ACTION,
+  gottenUserAction,
   loggedInAction,
   passImageUrlAction,
   productAddedAction,
@@ -16,10 +16,8 @@ import {
 import { Product } from '../model/product';
 
 export const initialUserState = {
-  email: '',
-  objectId: '',
+  user: {},
   userToken: '',
-  type: '',
   valid: false,
 };
 
@@ -80,8 +78,10 @@ export const userReducer = createReducer(
   on(loggedInAction, (state, data) => {
     return {
       ...state,
-      email: data.email,
-      objectId: data.objectId,
+      user: {
+        email: data.email,
+        objectId: data.objectId,
+      },
       userToken: data.userToken,
       type: data.userType,
     };
@@ -95,9 +95,18 @@ export const userReducer = createReducer(
   on(signedupAction, (state, data) => {
     return {
       ...state,
-      email: data.user.email,
+      user: data.user,
       valid: false,
     };
+  }),
+  on(gottenUserAction, (state, data) => {
+    return {
+      ...state,
+      user: data.user,
+    };
+  }),
+  on(emptyStateAction, (state) => {
+    return initialUserState;
   })
 );
 

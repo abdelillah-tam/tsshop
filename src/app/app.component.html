@@ -32,6 +32,8 @@
         <div style="cursor: pointer" (click)="navigateToAddProduct()">
           <mat-icon class="material-symbols-outlined" fontIcon="add"></mat-icon>
         </div>
+
+        } @if(userType !== null && userTokenValidation){
         <div
           style="cursor: pointer"
           routerLink="/cart"

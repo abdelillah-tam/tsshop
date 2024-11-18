@@ -1,43 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { userSelector } from '../store/selectors';
-import { emptyStateAction } from '../store/actions';
+import { emptyStateAction, getUserAction } from '../store/actions';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatIconModule],
+  imports: [RouterOutlet, MatIconModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit {
-
-
+export class DashboardComponent {
+  currentUser!: User;
 
   constructor(private router: Router, private store: Store) {
-
-  }
-  ngOnInit(): void {
+    let token = localStorage.getItem('userToken');
+    if (token) {
+      this.store.dispatch(getUserAction({ objectId: token }));
+    }
     this.store.select(userSelector).subscribe((result) => {
-      if (result.valid && localStorage.length === 4) {
+      if (!result.valid) {
+        this.router.navigate(['/']);
       }
-      else {
-        this.router.navigate(['/home']);
-      }
+      this.currentUser = result.user;
     });
   }
 
-
   logout() {
-   
     localStorage.removeItem('objectId');
     localStorage.removeItem('email');
     localStorage.removeItem('type');
     localStorage.removeItem('userToken');
 
     this.store.dispatch(emptyStateAction());
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 }

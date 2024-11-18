@@ -1,33 +1,48 @@
 <div class="signup-div">
-    <h2>Sign Up</h2>
+  <h2>Sign Up</h2>
 
-    <form class="signup-form" [formGroup]="signupGroup" (ngSubmit)="signup()">
-        <div class="input-class">
-            <label style="font-weight: bolder;">First Name</label>
-            <input placeholder="First Name" formControlName="firstName" />
-        </div>
-        <div class="input-class">
-            <label style="font-weight: bolder;">Last Name</label>
-            <input placeholder="Last Name" formControlName="lastName" />
-        </div>
-        <div class="input-class">
-            <label style="font-weight: bolder;">Email</label>
-            <input placeholder="Email" formControlName="email" />
-        </div>
-        <div class="input-class">
-            <label style="font-weight: bolder;">Password</label>
-            <input placeholder="Password" formControlName="password" type="password" />
-        </div>
-        <div class="input-class">
-            <label style="font-weight: bolder;">Confirm Password</label>
-            <input placeholder="Confirm Password" formControlName="confirm" type="password" />
-        </div>
-
-        <button class="signup-btn" [disabled]="disabledBtn" (click)="signup()">Sign Up</button>
-    </form>
-
-    <div style="display: flex;">
-        <p>Do You Have An Account?</p> <a style="all: unset; font-weight: bold; margin-left: 4px; cursor: pointer;">Log
-            In</a>
+  <form class="signup-form" [formGroup]="signupGroup" (ngSubmit)="signup()">
+    <div class="input-class">
+      <label style="font-weight: bolder">First Name</label>
+      <input placeholder="First Name" formControlName="firstName" />
     </div>
+    <div class="input-class">
+      <label style="font-weight: bolder">Last Name</label>
+      <input placeholder="Last Name" formControlName="lastName" />
+    </div>
+    <div class="input-class">
+      <label style="font-weight: bolder">Email</label>
+      <input placeholder="Email" formControlName="email" />
+    </div>
+    <div class="input-class">
+      <label style="font-weight: bolder">Password</label>
+      <input
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+      />
+    </div>
+    <div class="input-class">
+      <label style="font-weight: bolder">Confirm Password</label>
+      <input
+        placeholder="Confirm Password"
+        formControlName="confirm"
+        type="password"
+      />
+    </div>
+
+    <button class="signup-btn" [disabled]="disabledBtn" (click)="signup()">
+      Sign Up
+    </button>
+  </form>
+
+  <div style="display: flex">
+    <p>Do You Have An Account?</p>
+    <a
+      routerLink="/login"
+      routerLinkActive="active"
+      style="all: unset; font-weight: bold; margin-left: 4px; cursor: pointer"
+      >Log In</a
+    >
+  </div>
 </div>

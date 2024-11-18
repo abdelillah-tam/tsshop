@@ -10,13 +10,13 @@ import {
 import { Store } from '@ngrx/store';
 import { signupAction } from '../../store/actions';
 import { User } from '../../model/user';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { userSelector } from '../../store/selectors';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -38,9 +38,9 @@ export class SignupComponent implements OnInit {
       this.comparePasswordValidator('password', 'confirm'),
     ]);
     this.store.select(userSelector).subscribe((result) => {
-      if (result.email.length > 0 && !result.valid) {
+      if (result.user.email.length > 0 && !result.valid) {
         this.router.navigate(['/login']);
-      } else if (result.email.length > 0 && result.valid) {
+      } else if (result.user.email.length > 0 && result.valid) {
         this.router.navigate(['/dashboard']);
       }
     });

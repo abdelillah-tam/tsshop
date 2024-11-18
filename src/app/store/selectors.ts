@@ -1,11 +1,10 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { Product } from "../model/product";
+import { User } from "../model/user";
 
 const selectUserFeature = createFeatureSelector<{
-    email: string;
-    objectId: string;
+    user: User;
     userToken: string;
-    type: string;
     valid: boolean
 }>('user');
 

@@ -10,47 +10,47 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
-    {
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'settings',
+        component: SettingsComponent,
+      },
+      {
         path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'signup',
-        component: SignupComponent
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent,
-        children: [
-            {
-                path: 'settings',
-                component: SettingsComponent
-            },
-            {
-                path: '',
-                redirectTo: 'settings',
-                pathMatch: 'full'
-            }
-        ]
-    },
-    {
-        path: 'add-product',
-        component: AddProductComponent
-    },
-    {
-        path: 'shop/:category',
-        component: ShopComponent
-    },
-    {
-        path: 'product/:id',
-        component: ProductPageComponent
-    },
-    {
-        path: 'cart',
-        component: CartComponent
-    }
+        redirectTo: 'settings',
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
+    path: 'add-product',
+    component: AddProductComponent,
+  },
+  {
+    path: 'shop/:category',
+    component: ShopComponent,
+  },
+  {
+    path: 'product/:id',
+    component: ProductPageComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
 ];

@@ -48,7 +48,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   userTokenValidation: boolean = true;
 
   ngOnInit(): void {
-    this.store.dispatch(userTokenValidationAction());
+    if (localStorage.getItem('userToken')) {
+      this.store.dispatch(
+        userTokenValidationAction({ token: localStorage.getItem('userToken')! })
+      );
+    }
     this.store.select(validationSelector).subscribe((result) => {
       this.userTokenValidation = result;
     });
@@ -61,16 +65,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.changeDetectorRef.detectChanges();
   }
-  navigateToLogin() {
-    this.router.navigate(['/login']);
-  }
 
   navigateToAddProduct() {
     this.router.navigate(['/add-product']);
   }
 
   clickRequest() {
-    this.store.dispatch(userTokenValidationAction());
+    let token = localStorage.getItem('userToken');
+    if (token) {
+      this.store.dispatch(userTokenValidationAction({ token: token }));
+    }
     if (
       localStorage.getItem('email') !== null &&
       localStorage.getItem('objectId') !== null &&

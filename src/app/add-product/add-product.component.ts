@@ -4,24 +4,46 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Product } from '../model/product';
 import { Store } from '@ngrx/store';
-import { addProductAction, emptyStateAction, uploadProductImageAction, userTokenValidationAction } from '../store/actions';
-import { addProductSelector, fileSelector, validationSelector } from '../store/selectors';
+import {
+  addProductAction,
+  emptyStateAction,
+  uploadProductImageAction,
+  userTokenValidationAction,
+} from '../store/actions';
+import {
+  addProductSelector,
+  fileSelector,
+  validationSelector,
+} from '../store/selectors';
 import { Router } from '@angular/router';
 import { CATEGORIES } from '../model/categories';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
   providers: [CurrencyPipe],
   templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.scss'
+  styleUrl: './add-product.component.scss',
 })
 export class AddProductComponent implements OnInit {
-
   files: any[] = [];
 
   disabledBtn = false;
@@ -31,7 +53,7 @@ export class AddProductComponent implements OnInit {
     'empty.jpg',
     'empty.jpg',
     'empty.jpg',
-    'empty.jpg'
+    'empty.jpg',
   ];
 
   categories = CATEGORIES;
@@ -45,45 +67,41 @@ export class AddProductComponent implements OnInit {
     productDescription: new FormControl('', [Validators.required]),
     productCategory: new FormControl('', [Validators.required]),
     productQuantity: new FormControl('0', [Validators.required]),
-    productPrice: new FormControl(0.00, [Validators.required])
+    productPrice: new FormControl(0.0, [Validators.required]),
   });
 
-
-  constructor(private store: Store, private router: Router) { }
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    this.store.dispatch(userTokenValidationAction());
-    this.store.select(validationSelector)
-      .subscribe((result) => {
-        if (!result) {
-          this.router.navigate(['/home']);
-        }
-      })
-    this.store
-      .select(fileSelector)
-      .subscribe((result) => {
-        if (result.imageUrlOne.length > 0) {
-          let product = { ...result.product };
-          product.productImageUrlOne = result.imageUrlOne;
-          product.productImageUrlTwo = result.imageUrlTwo;
-          product.productImageUrlThree = result.imageUrlThree;
-          product.productImageUrlFour = result.imageUrlFour;
-          product.productImageUrlFive = result.imageUrlFive;
-          this.store.dispatch(addProductAction({ product: product }));
-          this.store.dispatch(emptyStateAction());
-        }
-
-      });
+    let token = localStorage.getItem('userToken');
+    if (token) {
+      this.store.dispatch(userTokenValidationAction({ token: token }));
+    }
+    this.store.select(validationSelector).subscribe((result) => {
+      if (!result) {
+        this.router.navigate(['/home']);
+      }
+    });
+    this.store.select(fileSelector).subscribe((result) => {
+      if (result.imageUrlOne.length > 0) {
+        let product = { ...result.product };
+        product.productImageUrlOne = result.imageUrlOne;
+        product.productImageUrlTwo = result.imageUrlTwo;
+        product.productImageUrlThree = result.imageUrlThree;
+        product.productImageUrlFour = result.imageUrlFour;
+        product.productImageUrlFive = result.imageUrlFive;
+        this.store.dispatch(addProductAction({ product: product }));
+        this.store.dispatch(emptyStateAction());
+      }
+    });
 
     this.store.select(addProductSelector).subscribe((result) => {
       if (result.productTitle.length > 0) {
         this.store.dispatch(emptyStateAction());
         this.router.navigate(['/home']);
       }
-    })
-
+    });
   }
-
 
   onImageAdded(e: any, index: number) {
     this.files.splice(index, index, e.target.files[0]);
@@ -110,33 +128,33 @@ export class AddProductComponent implements OnInit {
     fileReader.readAsDataURL(this.files[index]);
     fileReader.onload = (event: any) => {
       this.imageUrls[index] = event.target.result;
-    }
+    };
   }
 
   save() {
     if (this.productGroup.valid) {
-      this.store.dispatch(uploadProductImageAction({
-        file: this.files, product: {
-          productID: `${Date.now()}`,
-          productTitle: this.productGroup.value.productTitle!,
-          productCategory: this.productGroup.value.productCategory!,
-          productDescription: this.productGroup.value.productDescription!,
-          productQuantity: parseInt(this.productGroup.value.productQuantity!),
-          productPrice: this.productGroup.value.productPrice!,
-          objectId: '',
-          productImageUrlOne: '',
-          productImageUrlTwo: '',
-          productImageUrlThree: '',
-          productImageUrlFour: '',
-          productImageUrlFive: '',
-          productSells: 0
-        }
-      }));
-
+      this.store.dispatch(
+        uploadProductImageAction({
+          file: this.files,
+          product: {
+            productID: `${Date.now()}`,
+            productTitle: this.productGroup.value.productTitle!,
+            productCategory: this.productGroup.value.productCategory!,
+            productDescription: this.productGroup.value.productDescription!,
+            productQuantity: parseInt(this.productGroup.value.productQuantity!),
+            productPrice: this.productGroup.value.productPrice!,
+            objectId: '',
+            productImageUrlOne: '',
+            productImageUrlTwo: '',
+            productImageUrlThree: '',
+            productImageUrlFour: '',
+            productImageUrlFive: '',
+            productSells: 0,
+          },
+        })
+      );
 
       this.disabledBtn = true;
     }
-
   }
-
 }

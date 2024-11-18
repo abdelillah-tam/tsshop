@@ -1,18 +1,23 @@
 <header>
-    <p>Dashboard</p>
+  <p>Dashboard</p>
 </header>
 <ul class="panel">
-    <li class="panel-nav">
-        <div class="info-div">
-            <p style="font-weight: bold;"></p>
-            <p></p>
-        </div>
-        <div style="margin-top: 16px;">
-            <a><mat-icon class="material-symbols-outlined">settings</mat-icon>Settings</a>
-            <a (click)="logout()"><mat-icon class="material-symbols-outlined">logout</mat-icon>Log Out</a>
-        </div>
-    </li>
-    <li class="panel-result">
-        <router-outlet />
-    </li>
+  <li class="panel-nav">
+    <div class="info-div">
+      <p style="font-weight: bold;">{{ currentUser.firstname }}</p>
+      <p>{{ currentUser.lastname }}</p>
+    </div>
+    <div style="margin-top: 16px">
+      <a
+        ><mat-icon class="material-symbols-outlined">settings</mat-icon
+        >Settings</a
+      >
+      <a (click)="logout()"
+        ><mat-icon class="material-symbols-outlined">logout</mat-icon>Log Out</a
+      >
+    </div>
+  </li>
+  <li class="panel-result">
+    <router-outlet />
+  </li>
 </ul>

@@ -29,6 +29,9 @@ header{
         height: fit-content;
 
         .info-div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             p{
                 margin-top: 8px;
             }

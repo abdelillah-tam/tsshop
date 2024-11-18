@@ -20,21 +20,28 @@ import { userSelector, validationSelector } from '../../store/selectors';
 export class LoginComponent {
   constructor(private store: Store, private router: Router) {
     this.store.select(userSelector).subscribe((data) => {
-      if (data.email.length !== 0) {
-        localStorage.setItem('email', data.email);
-        localStorage.setItem('objectId', data.objectId);
-        localStorage.setItem('userToken', data.userToken);
-        localStorage.setItem('type', data.type);
-      }
-      this.store.dispatch(userTokenValidationAction());
-
-      if (data.email.length > 0 && data.valid) {
-        this.router.navigate(['/dashboard']);
+      let token = localStorage.getItem('userToken');
+      if (typeof data.user.email === 'string') {
+        if (data.user.email.length !== 0) {
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('objectId', data.user.objectId);
+          localStorage.setItem('userToken', data.userToken);
+          localStorage.setItem('type', data.user.type);
+        }
+        if (token) {
+          this.store.dispatch(
+            userTokenValidationAction({
+              token: token,
+            })
+          );
+        }
+        if (data.user.email.length > 0 && data.valid) {
+          this.router.navigate(['/dashboard']);
+        }
       }
     });
 
     this.store.select(validationSelector).subscribe((result) => {
-      console.log(result);
       if (
         localStorage.getItem('email') !== null &&
         localStorage.getItem('objectId') !== null &&
